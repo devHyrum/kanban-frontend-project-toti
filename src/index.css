@@ -1,0 +1,30 @@
+.app {
+  display: flex;
+}
+
+.sidebar {
+  width: 250px;
+  background-color: #6c63ff;
+  height: 100vh;
+  padding: 20px;
+  color: white;
+}
+
+.sidebar ul {
+  list-style: none;
+  padding: 0;
+}
+
+.sidebar li {
+  margin-bottom: 20px;
+}
+
+.sidebar a {
+  color: white;
+  text-decoration: none;
+}
+
+.content {
+  flex-grow: 1;
+  padding: 20px;
+}
