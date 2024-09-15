@@ -25,7 +25,7 @@ Siga os passos abaixo para clonar o repositório e entrar na sua branch designad
 Abra o terminal e execute o seguinte comando para clonar o repositório:
 
 ```bash
-git clone https://github.com/seu-usuario/kanban-frontend-project-toti.git
+git clone https://github.com/devHyrum/kanban-frontend-project-toti.git
 ```
 
 ### 2. Entrar na pasta do projeto
