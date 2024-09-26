@@ -22,7 +22,7 @@ export default function Welcome() {
         <div className='welcome'>
           <img src={welcomePicture} alt="" />
           <div>
-            <h1>Bem-vindo ao Meu Kanban!</h1>
+            <h1>Bem-vindo todo mundo!</h1>
             <p>Escolha uma das opções no menu à esquerda para começar.</p>
           </div>
         </div>

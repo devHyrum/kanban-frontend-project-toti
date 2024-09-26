@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import LoaderRelatorios from '../loadings/LoaderRelatorios.jsx';
+import './Relatorios.css'
 
 export default function Relatorios() {
   const [loading, setLoading] = useState(true); 

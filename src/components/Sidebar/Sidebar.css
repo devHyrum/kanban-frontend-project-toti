@@ -1,7 +1,7 @@
 .sidebar {
-    width: 250px;
+    width: 210px;
     background-color: #7C3AED;
-    height: 100vh;
+    height: 100%;
     padding: 20px;
     color: white;
     picture{
@@ -16,8 +16,11 @@
       li {
         margin-bottom: 30px;
         a {
+          display: flex;
+          align-items: center;
           color: white;
           text-decoration: none;
+          gap: 0.5rem;
         }
       }
     }
@@ -34,4 +37,29 @@
   font-weight: 800; 
   transition: all 0.3s ease-in-out;
 }
-  
+
+@media (width <= 768px) {
+  .logo{
+    content: url(./logoMobile.png);
+  }
+  .sidebar {
+    width: auto;
+    padding: 0 4px 0 4px;
+    picture{
+      img{
+        width: 2.5rem;
+        padding-bottom: 3rem;
+        padding-top: 1rem;
+      }
+    }
+    ul{
+      li{
+        a{
+          p{
+            display: none;
+          }
+        }
+      }
+    }
+  }
+}
