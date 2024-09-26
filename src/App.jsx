@@ -17,12 +17,12 @@ function App() {
         <div className="content">
           <Header />
           <Routes>
-            <Route path="/" element={<Welcome />} />
-            <Route path="/kanban/dashboard" element={<Boards />} />
-            <Route path="/kanban/groups" element={<Equipes />} />
-            <Route path="/kanban/reports" element={<Relatorios />} />
-            <Route path="/kanban/myProfile" element={<Ajustes />} />
-            <Route path="/kanban/help" element={<Help />} />
+            <Route path="/:id" element={<Welcome />} />
+            <Route path="/:id/kanban/dashboard" element={<Boards />} />
+            <Route path="/:id/kanban/groups" element={<Equipes />} />
+            <Route path="/:id/kanban/reports" element={<Relatorios />} />
+            <Route path="/:id/kanban/myProfile" element={<Ajustes />} />
+            <Route path="/:id/kanban/help" element={<Help />} />
           </Routes>
         </div>
       </div>
