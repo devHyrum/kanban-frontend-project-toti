@@ -6,7 +6,8 @@ import Equipes from "./components//Equipes/Equipes.jsx";
 import Relatorios from "./components/Relatorios/Relatorios.jsx";
 import Ajustes from "./components/Ajustes/Ajustes.jsx";
 import Header from "./components/Header/Header.jsx";
-import Welcome from "./components/Welcome.jsx";
+import Welcome from "./components/Welcome/Welcome.jsx";
+import Help from "./components/Help/Help.jsx";
 
 function App() {
   return (
@@ -21,6 +22,7 @@ function App() {
             <Route path="/kanban/groups" element={<Equipes />} />
             <Route path="/kanban/reports" element={<Relatorios />} />
             <Route path="/kanban/myProfile" element={<Ajustes />} />
+            <Route path="/kanban/help" element={<Help />} />
           </Routes>
         </div>
       </div>

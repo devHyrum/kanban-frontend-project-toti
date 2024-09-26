@@ -21,6 +21,8 @@
 @media (width <= 768px){
   .content{
     border-radius: 20px 20px 0 0;
-    width: 0;
+    width: 0%;
+    padding: 1rem 1rem 0rem 1rem;  
+    height: calc(100vh - 2rem);
   }
 }

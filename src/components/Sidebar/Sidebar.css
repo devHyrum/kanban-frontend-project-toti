@@ -43,6 +43,8 @@
         justify-content: center;
         align-items: center;
         margin-bottom: 0.6rem;
+        color: white;
+        text-decoration: none;
         :hover{
           text-decoration: underline;
         }
@@ -58,14 +60,12 @@
         justify-content: center;
         a{
           margin: 5px;
-          img{
-            width: 30px;
-          }
           svg{
             width: 30px;
-            :hover{
-                fill: white;
-            }
+            
+          }
+          &:hover svg{
+            fill: white;
           }
         }
       }
@@ -100,7 +100,7 @@
       img{
         width: 2.5rem;
         padding-bottom: 3rem;
-        padding-top: 1rem;
+        padding-top: 2rem;
       }
     }
     nav{
