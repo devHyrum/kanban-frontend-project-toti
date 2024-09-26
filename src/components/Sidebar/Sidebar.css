@@ -1,9 +1,11 @@
 .sidebar {
     width: 210px;
     background-color: #7C3AED;
-    height: 100%;
+    height: (100vh-20px);
     padding: 20px;
     color: white;
+    display: flex;
+    flex-direction: column;
     picture{
       img{
         width: 60%;
@@ -14,27 +16,73 @@
       list-style: none;
       padding: 0;
       li {
-        margin-bottom: 30px;
+        margin-bottom: 10px;
+        :hover{
+          background-color: #7034d5;
+          border-radius: 10px;
+          transition: all 0.3s ease-in-out;
+        }
         a {
           display: flex;
           align-items: center;
           color: white;
           text-decoration: none;
           gap: 0.5rem;
+          padding: 1rem;
+        }
+      }
+    }
+    footer {
+      margin-top: auto;
+      hr{
+        border: 2px solid #4a238e;
+        margin: 0.3rem 0rem 0.3rem 0rem;
+      }
+      .helpPage{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin-bottom: 0.6rem;
+        :hover{
+          text-decoration: underline;
+        }
+        svg{
+          width: 30px;
+        }
+        p{
+          padding-left: 5px;
+        }
+      }
+      .redes{
+        display: flex;
+        justify-content: center;
+        a{
+          margin: 5px;
+          img{
+            width: 30px;
+          }
+          svg{
+            width: 30px;
+            :hover{
+                fill: white;
+            }
+          }
         }
       }
     }
   }
-  
+
 .inactive-link {
   font-size: 16px;
   font-weight: 300;
-  transition: all 0.3s ease-in-out; 
+  transition: all 0.3s ease-in-out;
 }
 
 .active-link {
   font-size: 25px; 
   font-weight: 800; 
+  background-color: #5729a6;
+  border-radius: 10px;
   transition: all 0.3s ease-in-out;
 }
 
@@ -45,6 +93,9 @@
   .sidebar {
     width: auto;
     padding: 0 4px 0 4px;
+    height: 100vh;
+    overflow-y: auto;
+    scroll-behavior: smooth; 
     picture{
       img{
         width: 2.5rem;
@@ -52,14 +103,46 @@
         padding-top: 1rem;
       }
     }
+    nav{
+      margin-bottom: 3rem;
+    }
     ul{
       li{
         a{
+          padding: 2px;
+          img{
+            padding: 5px;
+          }
           p{
             display: none;
           }
         }
       }
     }
+    footer {
+      .helpPage{
+        svg{
+          width: 27px;
+        }
+        p{
+          display: none;
+        }
+      }
+      .redes{
+        a{
+          svg{
+            width: 25px;
+          }
+        }
+      }
+    }
+  }
+  .active-link{
+    background-color: #5729a6;
+    border-radius: 10px;
+  }
+  .redes{
+    display: flex;
+    flex-direction: column;
   }
 }

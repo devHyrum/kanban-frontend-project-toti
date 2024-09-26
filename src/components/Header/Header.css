@@ -16,8 +16,7 @@ header{
     }
   }
   hr{
-    border-color: #8e3aed;
-    border: '1px';
+    border: 1px solid #8e3aed;
     margin: 1rem 0rem 1rem 0rem;
   }
 
