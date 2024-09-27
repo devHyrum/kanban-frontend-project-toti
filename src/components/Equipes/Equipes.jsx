@@ -64,7 +64,7 @@ export default function Equipes() {
       setUsuarios(usuariosData);
       setLoading(false);
     }, 1000); // Simula um delay de 1 segundo
-
+  },[])
 
   useEffect(() => {
     const timer = setTimeout(() => {
