@@ -1,8 +1,11 @@
-/* Estilos para o componente Equipes */
+.equipes-conteudo{
+  overflow-x: auto;
+  scroll-behavior: smooth; 
+  height: calc(100vh - 9.5rem);
+}
 .equipe-container {
     display: flex;
     flex-direction: column;
-    gap: 20px;
   }
   
   .usuario {
@@ -18,15 +21,59 @@
     width: 100px;
     height: 100px;
     object-fit: cover;
+    border: 1px solid blueviolet;
+    padding: 2px;
+    cursor: pointer;
   }
   
   .usuario-info {
     display: flex;
     flex-direction: column;
     justify-content: center;
+    p {
+      margin: 5px 0;
+      a{
+        text-decoration: none;
+        color: blueviolet;
+        &:hover{
+          color: rgb(85, 24, 141);
+        }
+      }
+    }
   }
   
-  .usuario-info p {
-    margin: 5px 0;
+
+@media (width <= 375px){
+  .equipes-conteudo{
+    height: calc(100vh - 5.5rem);
   }
-  
+  .usuario{
+    img{
+      width: 50px;
+      height: 50px;
+    }
+  }
+  .usuario-info {
+    p{
+      font-size: 12px;
+      margin: 2px;
+    }
+  }
+}
+@media (376px <= width <= 768px){
+  .equipes-conteudo{
+    height: calc(100vh - 5.5rem);
+  }
+  .usuario{
+    img{
+      width: 70px;
+      height: 70px;
+    }
+  }
+  .usuario-info {
+    p{
+      font-size: 14px;
+      margin: 2px;
+    }
+  }
+}

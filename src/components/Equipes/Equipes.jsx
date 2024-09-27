@@ -1,113 +1,86 @@
 import React, { useState, useEffect } from "react";
 import LoaderEquipes from "../loadings/LoaderEquipes.jsx";
+import Modal from "./Modal"; // Importe o modal
+import './Equipes.css'
 
 export default function Equipes() {
   const [loading, setLoading] = useState(true);
-
   const [usuarios, setUsuarios] = useState([]);
+  const [modalOpen, setModalOpen] = useState(false); // Controla a abertura do modal
+  const [selectedImage, setSelectedImage] = useState(null); // Guarda a imagem selecionada
 
-  // Lista dos usuários 
-  const usuariosData = [
-    {
-      id: 1,
-      name: "João Siqueira",
-      email: "joao.silva@gmail.com",
-      description: "Developer everytime baby",
-      job_title: "Engenheiro de Software",
-      user_photo: "1726761235214-avatarTest.png"
-    },
-    {
-      id: 2,
-      name: "Maria Souza",
-      email: "maria.souza@example.com",
-      description: "Responsável pelo marketing digital",
-      job_title: "Especialista em Marketing",      
-      user_photo: null
-    },
-    {
-      id: 3,
-      name: "Carlos Lima",
-      email: "carlos.lima@example.com",
-      description: "Gerencia o design dos produtos",
-      job_title: "Designer Gráfico",
-      user_photo: null
-    },
-    {
-      id: 9,
-      name: "Francisco Lima",
-      email: "francisoLima@gmail.com",
-      description: "I like to drink coffee",
-      job_title: "Developer",
-      user_photo: "1726773311511-francis.jpg"
-    },
-    {
-      id: 11,
-      name: "Hyrum Spencer",
-      email: "hyrum@gmail.com",
-      description: "Estudante de Programacão Fullstack",
-      job_title: "Fullstack Developer",
-      user_photo: null
-    },
-    {
-      id: 12,
-      name: "Barrabás",
-      email: "traidor@gmail.com",
-      description: "Coordenador da equipe de trabalho",
-      job_title: "Scrum muster",      
-      user_photo: "1726969494839-protagonista.png"
+  const fetchUsuarios = async () => {
+    try {
+      const response = await fetch('http://localhost:3000/users');
+      const data = await response.json();
+      setUsuarios(data);
+    } catch (error) {
+      console.error('Erro ao buscar os dados de todos os usuários:', error);
     }
-  ];
-
-  useEffect(() => {
-    // Simulando o tempo de carregamento
-    setTimeout(() => {
-      setUsuarios(usuariosData);
-      setLoading(false);
-    }, 1000); // Simula um delay de 1 segundo
-  },[])
+  };
 
   useEffect(() => {
     const timer = setTimeout(() => {
+      fetchUsuarios();
       setLoading(false);
     }, 1000);
 
     return () => clearTimeout(timer);
-
   }, []);
+
+  // Função para abrir o modal com a imagem
+  const openModal = (imageSrc) => {
+    setSelectedImage(imageSrc);
+    setModalOpen(true);
+  };
+
+  // Função para fechar o modal
+  const closeModal = () => {
+    setModalOpen(false);
+    setSelectedImage(null);
+  };
 
   return (
     <div>
       {loading ? (
-        <LoaderEquipes /> // Mostra o loader enquanto está carregando
+        <LoaderEquipes /> 
       ) : (
-        <div>
-          <h1>Lista de Usuários</h1>
+        <div className="equipes-conteudo">
           {usuarios.length > 0 ? (
             <ul className="equipe-container">
-            {usuarios.map((usuario) => (
-              <li key={usuario.id} className="usuario">
-                {usuario.user_photo ? (
-                  <img
-                    src={`http://localhost:3000/uploads/${usuario.user_photo}`}
-                    alt={usuario.name}
-                  />
-                ) : (
-                  <p>Sem foto disponível</p>
-                )}
-                <div className="usuario-info">
-                  <p>Nome: {usuario.name}</p>
-                  <p>Email: {usuario.email}</p>
-                  <p>Descrição: {usuario.description}</p>
-                  <p>Cargo: {usuario.job_title}</p>
-                </div>
-              </li>
-            ))}
-          </ul>          
+              {usuarios.map((usuario) => (
+                <li key={usuario.id} className="usuario">
+                  {usuario.user_photo ? (
+                    <img
+                      src={`http://localhost:3000/users/${usuario.id}/image`}
+                      alt={usuario.name}
+                      onClick={() => openModal(`http://localhost:3000/users/${usuario.id}/image`)} // Abre o modal ao clicar
+                    />
+                  ) : (
+                    <p>Sem foto disponível</p>
+                  )}
+                  <div className="usuario-info">
+                    <p>Nome: {usuario.name}</p>
+                    <p>Email: <a href={`mailto:${usuario.email}`}>{usuario.email}</a></p>
+                    <p>Descrição: {usuario.description}</p>
+                    <p>Cargo: {usuario.job_title}</p>
+                  </div>
+                </li>
+              ))}
+            </ul>
           ) : (
             <p>Nenhum usuário encontrado.</p>
           )}
         </div>
       )}
+      
+      {/* Renderiza o modal com a imagem selecionada */}
+      <Modal
+        isOpen={modalOpen}
+        closeModal={closeModal}
+        imageSrc={selectedImage}
+        altText="Foto do usuário"
+      />
     </div>
   );
 }
