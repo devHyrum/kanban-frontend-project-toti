@@ -1,0 +1,32 @@
+/* Estilos para o componente Equipes */
+.equipe-container {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+  
+  .usuario {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    border-bottom: 1px solid #ddd;
+    padding: 15px 0;
+  }
+  
+  .usuario img {
+    border-radius: 50%;
+    width: 100px;
+    height: 100px;
+    object-fit: cover;
+  }
+  
+  .usuario-info {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+  
+  .usuario-info p {
+    margin: 5px 0;
+  }
+  
