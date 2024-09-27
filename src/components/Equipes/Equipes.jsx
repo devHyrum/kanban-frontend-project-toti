@@ -1,8 +1,9 @@
-import React, { useState, useEffect } from 'react';
-import LoaderEquipes from '../loadings/LoaderEquipes.jsx';
+import React, { useState, useEffect } from "react";
+import LoaderEquipes from "../loadings/LoaderEquipes.jsx";
 
 export default function Equipes() {
   const [loading, setLoading] = useState(true);
+
   const [usuarios, setUsuarios] = useState([]);
 
   // Lista dos usuários 
@@ -63,6 +64,15 @@ export default function Equipes() {
       setUsuarios(usuariosData);
       setLoading(false);
     }, 1000); // Simula um delay de 1 segundo
+
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setLoading(false);
+    }, 1000);
+
+    return () => clearTimeout(timer);
+
   }, []);
 
   return (

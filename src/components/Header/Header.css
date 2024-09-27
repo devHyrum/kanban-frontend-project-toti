@@ -2,6 +2,11 @@ header{
     display: flex;
     justify-content: space-between;
     align-items: center;
+    h1 {
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
     a{
       width: min-content;
       border-radius: 100%;
@@ -14,9 +19,22 @@ header{
         width: 5rem;
       }
     }
+}
+hr{
+  border: 1px solid #8e3aed;
+  margin: 0.5rem 0rem 0.5rem 0rem;
+}
+
+@media (width <= 768px){
+  header{
+    h1{
+      font-size: 23px;
+    }
+    a{
+      img{
+        border-radius: 100%;
+        width: 2.5rem;
+      }
+    }
   }
-  hr{
-    border-color: #8e3aed;
-    border: '1px';
-    margin: 1rem 0rem 1rem 0rem;
-  }
+}

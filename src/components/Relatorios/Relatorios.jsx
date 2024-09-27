@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import LoaderRelatorios from '../loadings/LoaderRelatorios.jsx';
+import './Relatorios.css'
 
 export default function Relatorios() {
   const [loading, setLoading] = useState(true); 
@@ -8,7 +9,7 @@ export default function Relatorios() {
 
     const timer = setTimeout(() => {
       setLoading(false); 
-    }, 2000);
+    }, 1000);
 
     return () => clearTimeout(timer); 
   }, []);
