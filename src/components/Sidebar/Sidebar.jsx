@@ -5,17 +5,16 @@ import dashboard from "./dashboard.svg";
 import equipes from "./equipes.svg";
 import relatorios from "./relatorios.svg";
 import ajustes from "./ajustes.svg";
-import { Link, NavLink, useParams } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 import "./Sidebar.css";
 
 export default function Sidebar() {
-  const { id } = useParams();  // Pega o id da URL
   const [isOpen, setIsOpen] = useState(false);
 
   return (
     <div className="sidebar">
       <picture>
-        <Link to={`/${id}`}>
+        <Link to="">
           <img src={logoTotiDark} alt="logoTotiDark" className="logo"/>
         </Link>
       </picture>
@@ -23,7 +22,7 @@ export default function Sidebar() {
         <ul>
           <li>
             <NavLink
-              to={`/${id}/kanban/dashboard`}
+              to="kanban/dashboard"
               className={({ isActive }) =>
                 isActive ? "active-link" : "inactive-link"
               }
@@ -35,7 +34,7 @@ export default function Sidebar() {
 
           <li>
             <NavLink
-              to={`/${id}/kanban/groups`}
+              to="kanban/groups"
               className={({ isActive }) =>
                 isActive ? "active-link" : "inactive-link"
               }
@@ -46,7 +45,7 @@ export default function Sidebar() {
           </li>
           <li>
             <NavLink
-              to={`/${id}/kanban/reports`}
+              to="kanban/reports"
               className={({ isActive }) =>
                 isActive ? "active-link" : "inactive-link"
               }
@@ -57,7 +56,7 @@ export default function Sidebar() {
           </li>
           <li>
             <NavLink
-              to={`/${id}/kanban/myProfile`}
+              to="kanban/myProfile"
               className={({ isActive }) =>
                 isActive ? "active-link" : "inactive-link"
               }
@@ -69,7 +68,7 @@ export default function Sidebar() {
         </ul>
       </nav>
       <footer className="footer">
-          <Link to={`/${id}/kanban/help`} className="helpPage">
+          <Link to='kanban/help' className="helpPage">
           <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" fill="white"><path d="M464 256A208 208 0 1 0 48 256a208 208 0 1 0 416 0zM0 256a256 256 0 1 1 512 0A256 256 0 1 1 0 256zm169.8-90.7c7.9-22.3 29.1-37.3 52.8-37.3l58.3 0c34.9 0 63.1 28.3 63.1 63.1c0 22.6-12.1 43.5-31.7 54.8L280 264.4c-.2 13-10.9 23.6-24 23.6c-13.3 0-24-10.7-24-24l0-13.5c0-8.6 4.6-16.5 12.1-20.8l44.3-25.4c4.7-2.7 7.6-7.7 7.6-13.1c0-8.4-6.8-15.1-15.1-15.1l-58.3 0c-3.4 0-6.4 2.1-7.5 5.3l-.4 1.2c-4.4 12.5-18.2 19-30.6 14.6s-19-18.2-14.6-30.6l.4-1.2zM224 352a32 32 0 1 1 64 0 32 32 0 1 1 -64 0z"/></svg>
           <p>Precisa ajuda?</p>
           </Link>

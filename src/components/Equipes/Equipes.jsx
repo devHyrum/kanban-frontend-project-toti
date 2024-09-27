@@ -1,16 +1,15 @@
-import React, { useState, useEffect } from 'react';
-import LoaderEquipes from '../loadings/LoaderEquipes.jsx';
+import React, { useState, useEffect } from "react";
+import LoaderEquipes from "../loadings/LoaderEquipes.jsx";
 
 export default function Equipes() {
-  const [loading, setLoading] = useState(true); 
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-
     const timer = setTimeout(() => {
-      setLoading(false); 
+      setLoading(false);
     }, 1000);
 
-    return () => clearTimeout(timer); 
+    return () => clearTimeout(timer);
   }, []);
 
   return (
@@ -24,5 +23,5 @@ export default function Equipes() {
         </div>
       )}
     </div>
-  )
+  );
 }

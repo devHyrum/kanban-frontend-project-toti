@@ -1,5 +1,5 @@
 import React from "react";
-import { Routes, Route } from "react-router-dom";
+import { Routes, Route, useParams } from "react-router-dom";
 import Sidebar from "./components/Sidebar/Sidebar.jsx";
 import Boards from "./components/Boards/Boards.jsx";
 import Equipes from "./components//Equipes/Equipes.jsx";
@@ -10,19 +10,20 @@ import Welcome from "./components/Welcome/Welcome.jsx";
 import Help from "./components/Help/Help.jsx";
 
 function App() {
+  const { id } = useParams()
   return (
     <>
       <div className="app">
-        <Sidebar />
+        <Sidebar id={id}/>
         <div className="content">
-          <Header />
+          <Header userId={id}/>
           <Routes>
-            <Route path="/:id" element={<Welcome />} />
-            <Route path="/:id/kanban/dashboard" element={<Boards />} />
-            <Route path="/:id/kanban/groups" element={<Equipes />} />
-            <Route path="/:id/kanban/reports" element={<Relatorios />} />
-            <Route path="/:id/kanban/myProfile" element={<Ajustes />} />
-            <Route path="/:id/kanban/help" element={<Help />} />
+            <Route path="/" element={<Welcome id={id}/>} />
+            <Route path="kanban/dashboard" element={<Boards id={id}/>} />
+            <Route path="kanban/groups" element={<Equipes id={id}/>} />
+            <Route path="kanban/reports" element={<Relatorios id={id}/>} />
+            <Route path="kanban/myProfile" element={<Ajustes id={id}/>} />
+            <Route path="kanban/help" element={<Help id={id}/>} />
           </Routes>
         </div>
       </div>

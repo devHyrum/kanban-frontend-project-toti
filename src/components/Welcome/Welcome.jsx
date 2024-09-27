@@ -3,7 +3,8 @@ import LoaderWelcome from '../loadings/LoaderWelcome';
 import welcomePicture from './welcomePicture.svg'
 import './Welcome.css'
 
-export default function Welcome() {
+export default function Welcome({id}) {
+
   const [loading, setLoading] = useState(true); 
 
   useEffect(() => {
@@ -15,6 +16,7 @@ export default function Welcome() {
     return () => clearTimeout(timer); 
   }, []);
   return (
+    <>
     <div className='welcome'>
       {loading ? (
         <LoaderWelcome />
@@ -30,5 +32,6 @@ export default function Welcome() {
         </>
       )}
     </div>
+    </>
   )
 }

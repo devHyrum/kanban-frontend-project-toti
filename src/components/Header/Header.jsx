@@ -1,10 +1,9 @@
 import React, { useEffect, useState } from 'react';
+import { Link, useLocation,  } from 'react-router-dom';
+import './Header.css';
 import userTest from './userTest.png'
-import { Link, useLocation, useParams } from 'react-router-dom'
-import './Header.css'
 
-export default function Header() {
-  const { id } = useParams();  // Pega o id da URL
+export default function Header({userId}) {
   const [user, setUser] = useState(null);  // Estado para armazenar as informações do usuário
 
   const location = useLocation();
@@ -12,10 +11,8 @@ export default function Header() {
   // Função para buscar as informações do usuário
   const fetchUser = async () => {
     try {
-      const response = await fetch(`http://localhost:3000/users/${id}`);
+      const response = await fetch(`http://localhost:3000/users/${userId}`);
       const data = await response.json();
-      console.log("Data:",data)
-      
       setUser(data);
     } catch (error) {
       console.error('Erro ao buscar os dados do usuário:', error);
@@ -24,33 +21,38 @@ export default function Header() {
 
   useEffect(() => {
     fetchUser();
-  }, [id]);
+  }, [userId]);
 
   const getTitle = () => {
-    switch(location.pathname){
-      case `/${id}/kanban/dashboard`:
+    switch (location.pathname) {
+      case `/${userId}/kanban/dashboard`:
         return 'Tarefas e mais...';
-      case `/${id}/kanban/groups`:
+      case `/${userId}/kanban/groups`:
         return 'O Melhor time!';
-      case `/${id}/kanban/reports`:
+      case `/${userId}/kanban/reports`:
         return 'Está concluído.';
-      case `/${id}/kanban/myProfile`:
+      case `/${userId}/kanban/myProfile`:
         return 'Meu Perfil';
-      case `/${id}/kanban/help`:
+      case `/${userId}/kanban/help`:
         return 'Ajuda';
       default:
         return user ? `Bem-Vindo ${user.name}!` : 'Bem-Vindo!';
     }
-  }
+  };
+
   return (
     <>
       <header>
         <h1>{getTitle()}</h1>
-        <Link to="/kanban/myProfile">
-          <img src={userTest} alt="userTest"/>
+        <Link to={`/${userId}/kanban/myProfile`}>
+          {user ? (
+            <img src={`http://localhost:3000/users/${userId}/image`} alt={user.name} />
+          ) : (
+            <img src={userTest} alt="Usuário padrão" />
+          )}
         </Link>
       </header>
-      <hr/>
+      <hr />
     </>
-  )
+  );
 }
