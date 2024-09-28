@@ -14,12 +14,12 @@
     transition: opacity 0.5s ease-in-out, visibility 0.5s ease-in-out;
   }
   
-  .modal-content {
+  .modal-foto {
     position: relative;
     background: #fff;
     padding: 20px;
     border-radius: 10px;
-    max-width: 80%;
+    width: auto;
     max-height: 80%;
     display: flex;
     flex-direction: column;
@@ -74,3 +74,14 @@
     opacity: 1;
     visibility: visible;
   }
+
+@media (375px <= width <= 768px){
+  .modal-foto {
+    width: auto;
+  }
+}
+@media (width <= 375px){
+  .modal-foto {
+    width: 65%;
+  }
+}

@@ -1,22 +1,22 @@
 import React from 'react';
-import './Modal.css';
+import './ModalFoto.css';
 
-export default function Modal({ isOpen, closeModal, imageSrc, altText }) {
+export default function ModalFoto({ isOpen, closeModal, imageSrc, altText }) {
 
   const downloadImage = () => {
-      const link = document.createElement('a');
-      link.href = imageSrc;
-      link.setAttribute('download', `${altText}.jpg`); // Define o nome do arquivo
-      document.body.appendChild(link);
-      link.click();
-      document.body.removeChild(link); // Remove o link após o clique
-    };
+    const link = document.createElement('a');
+    link.href = imageSrc;
+    link.setAttribute('download', `${altText}.jpg`); // Define o nome do arquivo
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link); // Remove o link após o clique
+  };
     
   if (!isOpen) return null; // Se o modal não estiver aberto, retorna null
 
   return (
     <div className={`modal-overlay ${isOpen ? 'open' : ''}`} onClick={closeModal}>
-      <div className="modal-content" onClick={(e) => e.stopPropagation()}>
+      <div className="modal-foto" onClick={(e) => e.stopPropagation()}>
         <button className="close-modal" onClick={closeModal}>
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" fill='#4a238e'><path d="M256 512A256 256 0 1 0 256 0a256 256 0 1 0 0 512zM175 175c9.4-9.4 24.6-9.4 33.9 0l47 47 47-47c9.4-9.4 24.6-9.4 33.9 0s9.4 24.6 0 33.9l-47 47 47 47c9.4 9.4 9.4 24.6 0 33.9s-24.6 9.4-33.9 0l-47-47-47 47c-9.4 9.4-24.6 9.4-33.9 0s-9.4-24.6 0-33.9l47-47-47-47c-9.4-9.4-9.4-24.6 0-33.9z"/></svg>
         </button>

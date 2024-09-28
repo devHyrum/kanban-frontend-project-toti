@@ -36,7 +36,7 @@ export default function Header({userId}) {
       case `/${userId}/kanban/help`:
         return 'Ajuda';
       default:
-        return user ? `Bem-Vindo ${user.name}!` : 'Bem-Vindo!';
+        return user ? `Olá ${user.name}! :D` : 'Bem-Vindo!';
     }
   };
 

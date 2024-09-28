@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import LoaderEquipes from "../loadings/LoaderEquipes.jsx";
-import Modal from "./Modal"; // Importe o modal
+import Modal from "./ModalFoto.jsx"; // Importe o modal
 import './Equipes.css'
 
 export default function Equipes() {
@@ -41,7 +41,7 @@ export default function Equipes() {
   };
 
   return (
-    <div>
+    <div className="equipes">
       {loading ? (
         <LoaderEquipes /> 
       ) : (
