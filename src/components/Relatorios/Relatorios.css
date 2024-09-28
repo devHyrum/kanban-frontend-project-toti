@@ -1,13 +1,18 @@
-.tasks-container {
+.relatorios-container {
     display: flex;
     justify-content: space-between;
   }
   
-  .task-card {
+  .relatorios-card {
     border: 1px solid black;
     padding: 10px;
     margin: 10px;
     width: 30%;
+    border-radius: 2rem;
+    &:hover{
+        background-color: antiquewhite;
+        cursor: pointer;
+    }
   }
   
   .user-photo {

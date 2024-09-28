@@ -6,6 +6,7 @@ const Boards = () => {
   const [tasks, setTasks] = useState([]);
   const [selectedTask, setSelectedTask] = useState(null); // Tarefa selecionada para exibição
   const [showTaskModal, setShowTaskModal] = useState(false);
+  const [editTaskData, setEditTaskData] = useState(null); // Dados da tarefa em edição
   const [isEditing, setIsEditing] = useState(false); // Define se o usuário está em modo de edição
   const [showNewTaskModal, setShowNewTaskModal] = useState(false);
   const [newTask, setNewTask] = useState({
