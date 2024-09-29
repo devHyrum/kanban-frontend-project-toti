@@ -11,6 +11,7 @@ export default function Relatorios() {
   const [filterCategory, setFilterCategory] = useState(""); // Filtro por categoria
   const [filterPriority, setFilterPriority] = useState(""); // Filtro por prioridade
   const [searchValue, setSearchValue] = useState(""); // Filtro por busca
+  const [expandedTaskId, setExpandedTaskId] = useState(null); // Controla qual card está expandido
 
   // Função para buscar todas as tarefas
   const fetchTasks = async () => {
@@ -74,6 +75,10 @@ export default function Relatorios() {
     return () => clearTimeout(timer);
   }, []);
 
+  const handleCardClick = (taskId) => {
+    setExpandedTaskId((prevTaskId) => (prevTaskId === taskId ? null : taskId)); // Alterna a expansão
+  };
+
   return (
 <div>
       {loading ? (
@@ -122,10 +127,16 @@ export default function Relatorios() {
           <div className="relatorios-container">
             {filteredTasks.length > 0 ? (
               filteredTasks.map((task) => (
-                  <div key={task.id} className="relatorios-card">
+                  <div key={task.id} className="relatorios-card" onClick={() => handleCardClick(task.id)}>
                     <h3>{task.title}</h3>
+                    {/* <p>{task.description}</p> */}
+                    <div
+                    className={`relatorios-description ${
+                      expandedTaskId === task.id ? "show" : ""
+                    }`}
+                     >
                     <p>{task.description}</p>
-
+                    </div>
                     <div className="container-due_date-usuario">
                       <p className="relatorio-due-date">
                       <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5"  stroke="currentColor" className="size-6">

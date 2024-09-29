@@ -55,11 +55,24 @@
   width: 100%;
   max-width: 300px;
   transition: transform 0.2s;
+  cursor: pointer;
+  height: max-content;
 }
 
 .relatorios-card:hover {
   transform: translateY(-5px);
   background-color: #f2ebfd;
+}
+.relatorios-description {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.5s ease-in-out;
+  font-size: 14px;
+}
+
+.relatorios-description.show {
+  max-height: 200px; /* Valor suficiente para mostrar o conteúdo */
+  transition: max-height 0.5s ease-in-out;
 }
 
 .relatorios-card h3 {
@@ -115,8 +128,9 @@
 .relatorios-conteudo{
   overflow-x: auto;
   scroll-behavior: smooth; 
-  height: calc(100vh - 9.5rem);
+  height: calc(100vh - 9.8rem);
 }
+
 .relatorio-usuario{
   display: flex;
   align-items: center;
@@ -205,7 +219,7 @@
 
 @media (width <= 768px) {
   .relatorios-conteudo{
-    height: calc(100vh - 5.8rem);
+    height: calc(100vh - 6rem);
   }
   .relatorios-filters{
     display: flex;
@@ -250,5 +264,13 @@
   }
   .container-due_date-usuario{
     margin: 0.3rem 0rem 0.3rem 0rem;
+  }
+  .relatorios-card{
+    h3{
+      font-size: 16px;
+    }
+  }
+  .relatorios-description {
+    font-size: 12px;
   }
 }

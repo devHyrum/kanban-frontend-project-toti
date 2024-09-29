@@ -1,7 +1,7 @@
 .equipes-conteudo{
   overflow-x: auto;
   scroll-behavior: smooth; 
-  height: calc(100vh - 9.3rem);
+  height: calc(100vh - 8.8rem);
 }
 .equipe-container {
     display: flex;
@@ -54,7 +54,7 @@
 
 @media (width <= 375px){
   .equipes-conteudo{
-    height: calc(100vh - 5.8rem);
+    height: calc(100vh - 6rem);
   }
   .usuario{
     img{
