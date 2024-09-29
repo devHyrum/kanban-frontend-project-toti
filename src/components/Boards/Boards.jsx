@@ -130,6 +130,8 @@ const fetchUsers = async () => {
 
   return (
     <div className="kanban-board">
+      
+      {/*  Coluna 'Para fazer' */}
       <div className="kanban-column">
         <div className="column-header">
           <h2>Para Fazer</h2>
@@ -137,6 +139,8 @@ const fetchUsers = async () => {
         </div>
         {renderColumns('Para fazer')}
       </div>
+
+      {/*  Coluna 'Em Progresso' */}
       <div className="kanban-column">
         <div className="column-header">
           <h2>Em Progresso</h2>
@@ -144,6 +148,8 @@ const fetchUsers = async () => {
         </div>
         {renderColumns('Em progresso')}
       </div>
+
+      {/*  Coluna 'Concluído' */}
       <div className="kanban-column">
         <div className="column-header">
           <h2>Concluído</h2>

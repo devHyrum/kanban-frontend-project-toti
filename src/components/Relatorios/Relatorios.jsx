@@ -1,63 +1,191 @@
-import React, { useState, useEffect } from 'react';
-import LoaderRelatorios from '../loadings/LoaderRelatorios.jsx';
-import './Relatorios.css'
-import axios from 'axios';
+import React, { useState, useEffect } from "react";
+import LoaderRelatorios from "../loadings/LoaderRelatorios.jsx";
+import "./Relatorios.css";
+import axios from "axios";
+import notFoundYourTask from './notFoundYourTask.svg'
 
 export default function Relatorios() {
   const [loading, setLoading] = useState(true);
   const [tasks, setTasks] = useState([]);
+  const [categories, setCategories] = useState([]);
+  const [filterCategory, setFilterCategory] = useState(""); // Filtro por categoria
+  const [filterPriority, setFilterPriority] = useState(""); // Filtro por prioridade
+  const [searchValue, setSearchValue] = useState(""); // Filtro por busca
 
-    // Função para buscar todas as tarefas
-    const fetchTasks = async () => {
-      try {
-        const response = await axios.get('http://localhost:3000/tasks');
-        setTasks(response.data);
-      } catch (error) {
-        console.error('Erro ao buscar tarefas:', error);
-      }
-    };
+  // Função para buscar todas as tarefas
+  const fetchTasks = async () => {
+    try {
+      const response = await axios.get("http://localhost:3000/tasks");
+      const tasksConcluidas = response.data.filter((task) => task.task_list_name === "Concluído");
+      setTasks(tasksConcluidas);
+    } catch (error) {
+      console.error("Erro ao buscar tarefas:", error);
+    }
+  };
+
+  const fetchCategories = async () => {
+    try {
+      const response = await axios.get("http://localhost:3000/task-categories");
+      setCategories(response.data);
+    } catch (error) {
+      console.error("Erro ao buscar categorias:", error);
+    }
+  };
+
+  // Função que aplica os filtros de categoria, prioridade e busca
+  const filteredTasks = tasks.filter((task) => {
+    // Filtro por categoria
+    const matchesCategory = filterCategory
+      ? task.category_name &&
+        task.category_name.toLowerCase().includes(filterCategory.toLowerCase())
+      : true;
+
+    // Filtro por prioridade
+    const matchesPriority = filterPriority
+      ? task.priority &&
+        task.priority.toLowerCase().includes(filterPriority.toLowerCase())
+      : true;
+
+    // Filtro de busca por título ou descrição
+    const matchesSearch = searchValue
+      ? (task.title &&
+          task.title.toLowerCase().includes(searchValue.toLowerCase())) ||
+        (task.description &&
+          task.description.toLowerCase().includes(searchValue.toLowerCase()))
+      : true;
+
+    return matchesCategory && matchesPriority && matchesSearch;
+  });
+
+  // Função para limpar os filtros
+  const clearFilters = () => {
+    setFilterCategory("");
+    setFilterPriority("");
+    setSearchValue("");
+  };
 
   useEffect(() => {
     const timer = setTimeout(() => {
       setLoading(false);
       fetchTasks();
+      fetchCategories();
     }, 1000);
 
-    return () => clearTimeout(timer); 
+    return () => clearTimeout(timer);
   }, []);
 
   return (
-    <div>
+<div>
       {loading ? (
         <LoaderRelatorios />
       ) : (
-        <div>
-          <h1>Relatórios</h1>
-          <p>Esta é a página de Relatórios!</p>
+        <div className="relatorios-conteudo">
+          {/* Contêiner de Filtros e Busca */}
+          <div className="relatorios-filters">
+            {/* Filtro por Categoria */}
+            <select
+              value={filterCategory}
+              onChange={(e) => setFilterCategory(e.target.value)}
+            >
+              <option value="">Todas Categorias</option>
+              {categories.map((category) => (
+                <option key={category.name} value={category.name}>
+                  {category.name}
+                </option>
+              ))}
+            </select>
 
-          {/* Exibir tarefas em três quadros */}
+            {/* Filtro por Prioridade */}
+            <select
+              value={filterPriority}
+              onChange={(e) => setFilterPriority(e.target.value)}
+            >
+              <option value="">Todas Prioridades</option>
+              <option value="low">Baixa</option>
+              <option value="medium">Média</option>
+              <option value="high">Alta</option>
+            </select>
+
+            {/* Busca por Título ou Descrição */}
+            <input
+              type="text"
+              value={searchValue}
+              onChange={(e) => setSearchValue(e.target.value)}
+              placeholder="Buscar por título ou descrição"
+            />
+
+            {/* Botão de Limpar Filtros */}
+            <button className="relatorios-clear-btn" onClick={clearFilters}>Limpar Filtros</button>
+          </div>
+
+          {/* Exibir tarefas filtradas ou mensagem de "Nenhuma tarefa encontrada" */}
           <div className="relatorios-container">
-            {tasks.filter(task => task.task_list_name === 'Concluído').map((task) => (
-              <div key={task.id} className="relatorios-card">
-                <h3>{task.title}</h3>
-                <p><strong>Data de conclusão:</strong> {new Date(task.due_date).toLocaleDateString()}</p>
-                <p><strong>Status:</strong> {task.status}</p>
-                <p><strong>Prioridade:</strong> {task.priority}</p>
-                <p><strong>Usuário:</strong> {task.user_name}</p>
-                {task.user_photo && (
-                  <img
-                    src={`/path/to/images/${task.user_photo}`}
-                    alt={`${task.user_name}`}
-                    className="user-photo"
-                  />
-                )}
-                <p><strong>Categoria:</strong> {task.category_name}</p>
-                <p><strong>Lista de tarefas:</strong> {task.task_list_name}</p>
+            {filteredTasks.length > 0 ? (
+              filteredTasks.map((task) => (
+                  <div key={task.id} className="relatorios-card">
+                    <h3>{task.title}</h3>
+                    <p>{task.description}</p>
+
+                    <div className="container-due_date-usuario">
+                      <p className="relatorio-due-date">
+                      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5"  stroke="currentColor" className="size-6">
+                        <path strokeLinecap="round" strokeLinejoin="round" d="M12 6v6h4.5m4.5 0a9 9 0 1 1-18 0 9 9 0 0  1 18 0Z" />
+                      </svg>
+                        {new Date(task.due_date).toLocaleDateString()}
+                      </p>
+
+                      <p className="relatorio-usuario">
+                        <strong>{task.user_name}</strong>
+                      {task.user_photo && (
+                        <img
+                        src={`http://localhost:3000/users/${task.user_id}/image`}
+                        alt={`${task.user_photo}`}
+                        className="user-photo"
+                        />
+                      )}
+                      </p>
+                    </div>
+
+                    <div className="container-categoria-e-prioridade">
+                    <p>
+                      <span className={`prioridade ${
+                        task.priority === "low"
+                          ? "prioridade-low"
+                          : task.priority === "medium"
+                          ? "prioridade-medium"
+                          : task.priority === "high"
+                          ? "prioridade-high"
+                          : ""
+                      }`}>{task.priority}</span>
+                    </p>
+                    <p>
+                      <span
+                        className={`categoria ${
+                          categories.find((category) => category.name === task.category_name)
+                            ? `categoria-${task.category_name.toLowerCase()}`
+                            : ""
+                        }`}
+                      >
+                        {task.category_name}
+                      </span>
+                    </p>
+
+                    </div>
+                  </div>
+                ))
+            ) : (
+              <div className='notFoundYourTask-conteudo'>
+                <img src={notFoundYourTask} alt="notFoundYourTask" />
+                <div>
+                  <h1>Não existe a tarefa</h1>
+                  <p>Tem certeza da sua busca?</p>
+                </div>
               </div>
-            ))}
+            )}
           </div>
         </div>
       )}
+
     </div>
   );
 }

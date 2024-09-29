@@ -60,10 +60,10 @@ export default function Equipes() {
                     <p>Sem foto disponível</p>
                   )}
                   <div className="usuario-info">
-                    <p>Nome: {usuario.name}</p>
-                    <p>Email: <a href={`mailto:${usuario.email}`}>{usuario.email}</a></p>
-                    <p>Descrição: {usuario.description}</p>
-                    <p>Cargo: {usuario.job_title}</p>
+                    <p><span>Nome:</span> {usuario.name}</p>
+                    <p><span>Email:</span> <a href={`mailto:${usuario.email}`}>{usuario.email}</a></p>
+                    <p><span>Descrição:</span> {usuario.description}</p>
+                    <p><span>Cargo:</span> {usuario.job_title}</p>
                   </div>
                 </li>
               ))}

@@ -1,7 +1,7 @@
 .equipes-conteudo{
   overflow-x: auto;
   scroll-behavior: smooth; 
-  height: calc(100vh - 9.5rem);
+  height: calc(100vh - 9.3rem);
 }
 .equipe-container {
     display: flex;
@@ -42,6 +42,9 @@
           color: rgb(85, 24, 141);
         }
       }
+      span{
+        font-weight: 700;
+      }
     }
   }
   .equipes{
@@ -51,7 +54,7 @@
 
 @media (width <= 375px){
   .equipes-conteudo{
-    height: calc(100vh - 5.5rem);
+    height: calc(100vh - 5.8rem);
   }
   .usuario{
     img{
@@ -68,7 +71,7 @@
 }
 @media (376px <= width <= 768px){
   .equipes-conteudo{
-    height: calc(100vh - 5.5rem);
+    height: calc(100vh - 5.8rem);
   }
   .usuario{
     img{
