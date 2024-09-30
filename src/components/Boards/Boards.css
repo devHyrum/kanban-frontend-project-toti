@@ -97,7 +97,21 @@
       border-radius: 50%;
     }
   }
-  
+  .sugestoes-users{
+    display: flex;
+    align-items: center;
+    &:hover{
+      background-color: #e5d8fb;
+    }
+    
+  }
+  .user-photo{
+    width: 35px;
+    height: 35px;
+    border-radius: 50%;
+    padding-right: 4px;
+    
+  }
   .modal {
     position: fixed;
     top: 0;

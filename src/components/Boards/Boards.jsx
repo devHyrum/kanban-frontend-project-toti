@@ -4,12 +4,16 @@ import './Boards.css'
 
 const Boards = ({myUserId}) => {
   const [tasks, setTasks] = useState([]);
+  const [users, setUsers] = useState([]);
   const [selectedTask, setSelectedTask] = useState(null); // Tarefa selecionada para exibição
   const [showTaskModal, setShowTaskModal] = useState(false);
   const [isEditing, setIsEditing] = useState(false); // Define se o usuário está em modo de edição
   const [showNewTaskModal, setShowNewTaskModal] = useState(false);
   const [categories, setCategories] = useState([]);
   const [listTask, setListTask] = useState([]);
+  const [suggestions, setSuggestions] = useState([])
+  const [categorySuggestions, setCategorySuggestions] = useState([]);
+  ;
 
   const [newTask, setNewTask] = useState({
     title: '',
@@ -32,6 +36,31 @@ const fetchUsers = async () => {
     console.error('Erro ao buscar usuários:', error);
   }
 };
+// Filtrar sugestões conforme o input do usuário
+const handleUserInput = (e) => {
+  const input = e.target.value;
+  setSelectedTask({ ...selectedTask, user_id: input });
+  setNewTask({ ...newTask, user_id: input });
+
+  if (input.trim() === '') {
+    setSuggestions([]); // Não mostrar sugestões se o input estiver vazio
+  } else {
+    // Filtrar os usuários que começam com o valor digitado
+    const filteredSuggestions = users.filter((user) =>
+      user.name.toLowerCase().startsWith(input.toLowerCase())
+    );
+    
+    setSuggestions(filteredSuggestions);
+  }
+};
+
+// Função para quando o usuário clicar em uma sugestão
+const handleSuggestionClick = (user) => {
+  setSelectedTask({ ...selectedTask, user_id: user.name });
+  setNewTask({ ...newTask, user_id: user.name });
+
+  setSuggestions([]); // Esconder as sugestões
+};
 
 const fetchCategories = async () => {
   try {
@@ -41,6 +70,30 @@ const fetchCategories = async () => {
     console.error("Erro ao buscar categorias:", error);
   }
 };
+// Filtrar sugestões de categorias conforme o input
+const handleCategoryInput = (e) => {
+  const input = e.target.value;
+  setSelectedTask({ ...selectedTask, category_id: input });
+  setNewTask({ ...newTask, category_id: input });
+
+  if (input.trim() === '') {
+    setCategorySuggestions([]); // Não mostrar sugestões se o input estiver vazio
+  } else {
+    // Filtrar as categorias que começam com o valor digitado
+    const filteredSuggestions = categories.filter((category) =>
+      category.name.toLowerCase().startsWith(input.toLowerCase())
+    );
+    setCategorySuggestions(filteredSuggestions);
+  }
+};
+
+// Função para quando o usuário clicar em uma sugestão de categoria
+const handleCategorySuggestionClick = (category) => {
+  setSelectedTask({ ...selectedTask, category_id: category.name }); // Definir a categoria selecionada
+  setNewTask({ ...newTask, category_id: category.name });
+  setCategorySuggestions([]); // Esconder as sugestões
+};
+
 const fetchListTask = async () => {
   try {
     const response = await axios.get("http://localhost:3000/task-lists");
@@ -139,6 +192,7 @@ const fetchListTask = async () => {
     fetchTasks();
     fetchCategories();
     fetchListTask();
+    fetchUsers();
   }, []);
 
   // Função para renderizar as colunas de acordo com o `task_list_name`
@@ -255,18 +309,76 @@ const fetchListTask = async () => {
                 </select>
 
                 <label>Responsável</label>
+                <div style={{ position: 'relative', marginBottom: '20px' }}>
                 <input
                   type="text"
                   value={selectedTask.user_id}
-                  onChange={(e) => setSelectedTask({ ...selectedTask, user_id: e.target.value })}
+                  onChange={handleUserInput}
+                  placeholder="Digite o nome do usuário"
                 />
+                {suggestions.length > 0 && (
+                  <ul style={{ position: 'absolute',
+                    top: '100%', // Posicionar logo abaixo do input
+                    left: 0,
+                    width: '100%',
+                    border: '1px solid #ccc',
+                    backgroundColor: '#fff',
+                    listStyleType: 'none',
+                    padding: '0',
+                    margin: '0',
+                    zIndex: 1000}}>
+                    {suggestions.map((user) => (
+                      <li
+                        key={user.id}
+                        style={{ padding: '8px', cursor: 'pointer' }}
+                        onClick={() => handleSuggestionClick(user)} className="sugestoes-users"
+                      >
+                        <img src={`http://localhost:3000/users/${user.id}/image`}
+                        alt={`${user.user_photo}`} className="user-photo"/>
+                        <p>{user.name}</p>
+                      </li>
+                    ))}
+                  </ul>
+                )}
 
-                <label>Categoria</label>
-                <input
-                  type="text"
-                  value={selectedTask.category_id}
-                  onChange={(e) => setSelectedTask({ ...selectedTask, category_id: e.target.value })}
-                />
+                </div>
+
+                <div style={{ position: 'relative', marginBottom: '20px' }}>
+                  <label>Categoria</label>
+                  <input
+                    type="text"
+                    value={selectedTask.category_id}
+                    onChange={handleCategoryInput}
+                    placeholder="Digite a categoria"
+                  />
+
+                  {/* Mostrar sugestões de categorias */}
+                  {categorySuggestions.length > 0 && (
+                    <ul style={{
+                      position: 'absolute',
+                      top: '100%',
+                      left: 0,
+                      width: '100%',
+                      border: '1px solid #ccc',
+                      backgroundColor: '#fff',
+                      listStyleType: 'none',
+                      padding: '0',
+                      margin: '0',
+                      zIndex: 1000
+                    }}>
+                      {categorySuggestions.map((category) => (
+                        <li
+                          key={category.id}
+                          style={{ padding: '8px', cursor: 'pointer'}}
+                          onClick={() => handleCategorySuggestionClick(category)} className="sugestoes-users"
+                        >
+                          {category.name}
+                        </li>
+                      ))}
+                    </ul>
+                  )}
+                </div>
+
                 <label>Arquivo</label>
                 <input
                   type="file"
@@ -329,18 +441,15 @@ const fetchListTask = async () => {
               value={newTask.due_date}
               onChange={(e) => setNewTask({ ...newTask, due_date: e.target.value })}
             />
-            <label>Responsável</label>
-            <input
-              type="text"
-              value={newTask.user_id}
-              onChange={(e) => setNewTask({ ...newTask, user_id: e.target.value })}
-            />
-            <label>Categoria</label>
-            <input
-              type="text"
-              value={newTask.category_id}
-              onChange={(e) => setNewTask({ ...newTask, category_id: e.target.value })}
-            />
+            <label>Status</label>
+            <select
+              value={newTask.task_list_id}
+              onChange={(e) => setNewTask({ ...newTask, task_list_id: e.target.value })}
+            >
+              <option value="Para Fazer">Para Fazer</option>
+              <option value="Em Progresso">Em Progresso</option>
+              <option value="Concluído">Concluído</option>
+            </select>
             <label>Prioridade</label>
             <select
               value={newTask.priority}
@@ -350,15 +459,81 @@ const fetchListTask = async () => {
               <option value="medium">Média</option>
               <option value="high">Alta</option>
             </select>
-            <label>Lista de tarea</label>
-            <select
-              value={newTask.task_list_id}
-              onChange={(e) => setNewTask({ ...newTask, task_list_id: e.target.value })}
-            >
-              <option value="Para Fazer">Para Fazer</option>
-              <option value="Em Progresso">Em Progresso</option>
-              <option value="Concluído">Concluído</option>
-            </select>
+
+            <div style={{ position: 'relative', marginBottom: '20px' }}>
+              <label>Responsável</label>
+              <input
+                type="text"
+                value={newTask.user_id} // Usando o valor de newTask
+                onChange={handleUserInput} // Chama a função de mudança do input
+                placeholder="Digite o nome do usuário"
+              />
+
+              {/* Mostrar sugestões de usuários */}
+              {suggestions.length > 0 && (
+                <ul style={{
+                  position: 'absolute',
+                  top: '100%',
+                  left: 0,
+                  width: '100%',
+                  border: '1px solid #ccc',
+                  backgroundColor: '#fff',
+                  listStyleType: 'none',
+                  padding: '0',
+                  margin: '0',
+                  zIndex: 1000 // Sobrepor a outros elementos
+                }}>
+                  {suggestions.map((user) => (
+                    <li
+                      key={user.id}
+                      style={{ padding: '8px', cursor: 'pointer'}}
+                      onClick={() => handleSuggestionClick(user)} className="sugestoes-users"
+                    >
+                      <img src={`http://localhost:3000/users/${user.id}/image`}
+                        alt={`${user.user_photo}`} className="user-photo"/>
+                        <p>{user.name}</p>
+                    </li>
+                  ))}
+                </ul>
+              )}
+            </div>
+
+            <div style={{ position: 'relative', marginBottom: '20px' }}>
+              <label>Categoria</label>
+              <input
+                type="text"
+                value={newTask.category_id} // Usando o valor de newTask
+                onChange={handleCategoryInput} // Chama a função de mudança do input
+                placeholder="Digite a categoria"
+              />
+
+              {/* Mostrar sugestões de categorias */}
+              {categorySuggestions.length > 0 && (
+                <ul style={{
+                  position: 'absolute',
+                  top: '100%',
+                  left: 0,
+                  width: '100%',
+                  border: '1px solid #ccc',
+                  backgroundColor: '#fff',
+                  listStyleType: 'none',
+                  padding: '0',
+                  margin: '0',
+                  zIndex: 1000 // Sobrepor a outros elementos
+                }}>
+                  {categorySuggestions.map((category) => (
+                    <li
+                      key={category.id}
+                      style={{ padding: '8px', cursor: 'pointer'}}
+                      onClick={() => handleCategorySuggestionClick(category)} className="sugestoes-users"
+                    >
+                      {category.name}
+                    </li>
+                  ))}
+                </ul>
+              )}
+            </div>
+
             <label>Arquivo</label>
             <input
               type="file"
