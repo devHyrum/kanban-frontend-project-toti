@@ -128,7 +128,7 @@
 .relatorios-conteudo{
   overflow-x: auto;
   scroll-behavior: smooth; 
-  height: calc(100vh - 9.8rem);
+  height: calc(100vh - 8.5rem);
 }
 
 .relatorio-usuario{
@@ -194,32 +194,9 @@
   }
 }
 
-.scroll-to-top {
-  position: absolute;
-
-  background-color: #007bff; /* Cor de fundo */
-  color: white; /* Cor do texto */
-  border: none;
-  border-radius: 50%; /* Botão circular */
-  padding: 10px;
-  cursor: pointer;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
-  display: none; /* Esconder inicialmente */
-}
-
-.scroll-to-top:hover {
-  background-color: #0056b3; /* Cor de fundo ao passar o mouse */
-}
-
-.arrow-up {
-  width: 24px;
-  height: 24px;
-}
-
-
 @media (width <= 768px) {
   .relatorios-conteudo{
-    height: calc(100vh - 6rem);
+    height: calc(100vh - 5.9rem);
   }
   .relatorios-filters{
     display: flex;

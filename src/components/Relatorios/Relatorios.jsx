@@ -129,7 +129,6 @@ export default function Relatorios() {
               filteredTasks.map((task) => (
                   <div key={task.id} className="relatorios-card" onClick={() => handleCardClick(task.id)}>
                     <h3>{task.title}</h3>
-                    {/* <p>{task.description}</p> */}
                     <div
                     className={`relatorios-description ${
                       expandedTaskId === task.id ? "show" : ""

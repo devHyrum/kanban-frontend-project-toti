@@ -2,13 +2,15 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import './Boards.css'
 
-const Boards = () => {
+const Boards = ({myUserId}) => {
   const [tasks, setTasks] = useState([]);
   const [selectedTask, setSelectedTask] = useState(null); // Tarefa selecionada para exibição
   const [showTaskModal, setShowTaskModal] = useState(false);
-  const [editTaskData, setEditTaskData] = useState(null); // Dados da tarefa em edição
   const [isEditing, setIsEditing] = useState(false); // Define se o usuário está em modo de edição
   const [showNewTaskModal, setShowNewTaskModal] = useState(false);
+  const [categories, setCategories] = useState([]);
+  const [listTask, setListTask] = useState([]);
+
   const [newTask, setNewTask] = useState({
     title: '',
     description: '',
@@ -28,6 +30,23 @@ const fetchUsers = async () => {
     setUsers(response.data);
   } catch (error) {
     console.error('Erro ao buscar usuários:', error);
+  }
+};
+
+const fetchCategories = async () => {
+  try {
+    const response = await axios.get("http://localhost:3000/task-categories");
+    setCategories(response.data);
+  } catch (error) {
+    console.error("Erro ao buscar categorias:", error);
+  }
+};
+const fetchListTask = async () => {
+  try {
+    const response = await axios.get("http://localhost:3000/task-lists");
+    setListTask(response.data);
+  } catch (error) {
+    console.error("Erro ao buscar categorias:", error);
   }
 };
 
@@ -56,8 +75,13 @@ const fetchUsers = async () => {
     // Função para editar a tarefa
     const editTask = async () => {
       try {
-        const response = await axios.put(`http://localhost:3000/tasks/11/tasks/${selectedTask.id}`, selectedTask);
-        setSelectedTask(response.data); // Atualizar tarefa selecionada com as mudanças
+        const response = await axios.put(`http://localhost:3000/tasks/${myUserId}/tasks/${selectedTask.id}`, selectedTask, {
+          headers: {
+            'Content-Type': 'multipart/form-data',  // Garantir que o tipo de conteúdo seja multipart
+          },
+        });
+
+        setSelectedTask(response.data);
         setShowTaskModal(false); // Fechar o modal após edição
         fetchTasks(); // Atualizar a lista de tarefas
       } catch (error) {
@@ -113,6 +137,8 @@ const fetchUsers = async () => {
 
   useEffect(() => {
     fetchTasks();
+    fetchCategories();
+    fetchListTask();
   }, []);
 
   // Função para renderizar as colunas de acordo com o `task_list_name`
@@ -122,41 +148,64 @@ const fetchUsers = async () => {
       .map(task => (
         <div key={task.id} className="task-card" onClick={() => fetchTaskDetails(task.id)}>
           <h3>{task.title}</h3>
-          <p>Responsável: {task.user_name}</p>
-          <p>Prioridade: {task.priority}</p>
+          <div className="container-due_date-usuario">
+          <p className="relatorio-due-date">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5"  stroke="currentColor" className="size-6">
+            <path strokeLinecap="round" strokeLinejoin="round" d="M12 6v6h4.5m4.5 0a9 9 0 1 1-18 0 9 9 0 0  1 18 0Z" />
+            </svg>
+            {new Date(task.due_date).toLocaleDateString()}
+          </p>
+          <img src={`http://localhost:3000/users/${task.user_id}/image`} alt={`${task.user_photo}`} className='user-photo'/>
+          </div>
+
+          <div className="container-categoria-e-prioridade">
+                    <p>
+                      <span className={`prioridade ${
+                        task.priority === "low"
+                          ? "prioridade-low"
+                          : task.priority === "medium"
+                          ? "prioridade-medium"
+                          : task.priority === "high"
+                          ? "prioridade-high"
+                          : ""
+                      }`}>{task.priority}</span>
+                    </p>
+                    <p>
+                      <span
+                        className={`categoria ${
+                          categories.find((category) => category.name === task.category_name)
+                            ? `categoria-${task.category_name.toLowerCase()}`
+                            : ""
+                        }`}
+                      >
+                        {task.category_name}
+                      </span>
+                    </p>
+
+                    </div>
+          
         </div>
       ));
   };
 
   return (
+    <>
     <div className="kanban-board">
-      
-      {/*  Coluna 'Para fazer' */}
-      <div className="kanban-column">
-        <div className="column-header">
-          <h2>Para Fazer</h2>
-          <button className="add-task-button" onClick={() => setShowNewTaskModal(true)}>+</button>
-        </div>
-        {renderColumns('Para fazer')}
-      </div>
 
-      {/*  Coluna 'Em Progresso' */}
-      <div className="kanban-column">
-        <div className="column-header">
-          <h2>Em Progresso</h2>
-          <button className="add-task-button" onClick={() => setShowNewTaskModal(true)}>+</button>
+      {/* Colunas */}
+      {listTask.map((listTaskName) => (
+        <div className="kanban-column" key={listTaskName.name}>
+                <div className="column-header">
+                <h2 value={listTaskName.name}>
+                  {listTaskName.name} <span>{(tasks.filter(tarefa => tarefa.task_list_name === `${listTaskName.name}`)).length}</span>
+                </h2>
+                <button className="add-task-button" onClick={() => setShowNewTaskModal(true)}>
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" fill='#333333'><path d="M256 80c0-17.7-14.3-32-32-32s-32 14.3-32 32l0 144L48 224c-17.7 0-32 14.3-32 32s14.3 32 32 32l144 0 0 144c0 17.7 14.3 32 32 32s32-14.3 32-32l0-144 144 0c17.7 0 32-14.3 32-32s-14.3-32-32-32l-144 0 0-144z"/></svg>
+                </button>
+                </div>
+                {renderColumns(`${listTaskName.name}`)}
         </div>
-        {renderColumns('Em progresso')}
-      </div>
-
-      {/*  Coluna 'Concluído' */}
-      <div className="kanban-column">
-        <div className="column-header">
-          <h2>Concluído</h2>
-          <button className="add-task-button" onClick={() => setShowNewTaskModal(true)}>+</button>
-        </div>
-        {renderColumns('Concluído')}
-      </div>
+              ))}
 
       {/* Modal para visualizar tarefa existente */}
       {showTaskModal && selectedTask && (
@@ -165,79 +214,84 @@ const fetchUsers = async () => {
             {isEditing ? (
               <>
                 <h2>Editar Tarefa</h2>
-      
-      {/* Campo de título */}
-      <label>Título</label>
-      <input
-        type="text"
-        value={selectedTask.title}
-        onChange={(e) => setSelectedTask({ ...selectedTask, title: e.target.value })}
-      />
-      
-      {/* Campo de descrição */}
-      <label>Descrição</label>
-      <textarea
-        value={selectedTask.description}
-        onChange={(e) => setSelectedTask({ ...selectedTask, description: e.target.value })}
-      />
+                <label>Título</label>
+                <input
+                  type="text"
+                  value={selectedTask.title}
+                  onChange={(e) => setSelectedTask({ ...selectedTask, title: e.target.value })}
+                />
+                
+                <label>Descrição</label>
+                <textarea
+                  value={selectedTask.description}
+                  onChange={(e) => setSelectedTask({ ...selectedTask, description: e.target.value })}
+                />
 
-      {/* Campo de data de entrega */}
-      <label>Data de Entrega</label>
-      <input
-        type="date"
-        value={new Date(selectedTask.due_date).toISOString().substr(0, 10)}
-        onChange={(e) => setSelectedTask({ ...selectedTask, due_date: e.target.value })}
-      />
+                <label>Data de Entrega</label>
+                <input
+                  type="date"
+                  value={new Date(selectedTask.due_date).toISOString().substr(0, 10)}
+                  onChange={(e) => setSelectedTask({ ...selectedTask, due_date: e.target.value })}
+                />
 
-      {/* Campo de status */}
-      <label>Status</label>
-      <select
-        value={selectedTask.task_list_id}
-        onChange={(e) => setSelectedTask({ ...selectedTask, task_list_id: e.target.value })}
-      >
-        <option value="Para Fazer">Para Fazer</option>
-        <option value="Em Progresso">Em Progresso</option>
-        <option value="Concluído">Concluído</option>
-      </select>
+                <label>Status</label>
+                <select
+                  value={selectedTask.task_list_id}
+                  onChange={(e) => setSelectedTask({ ...selectedTask, task_list_id: e.target.value })}
+                >
+                  <option value="Para Fazer">Para Fazer</option>
+                  <option value="Em Progresso">Em Progresso</option>
+                  <option value="Concluído">Concluído</option>
+                </select>
 
-      {/* Campo de prioridade */}
-      <label>Prioridade</label>
-      <select
-        value={selectedTask.priority}
-        onChange={(e) => setSelectedTask({ ...selectedTask, priority: e.target.value })}
-      >
-        <option value="low">Baixa</option>
-        <option value="medium">Média</option>
-        <option value="high">Alta</option>
-      </select>
+                <label>Prioridade</label>
+                <select
+                  value={selectedTask.priority}
+                  onChange={(e) => setSelectedTask({ ...selectedTask, priority: e.target.value })}
+                >
+                  <option value="low">Baixa</option>
+                  <option value="medium">Média</option>
+                  <option value="high">Alta</option>
+                </select>
 
-      {/* Campo de responsável */}
-      <label>Responsável</label>
-      <input
-        type="text"
-        value={selectedTask.user_id}
-        onChange={(e) => setSelectedTask({ ...selectedTask, user_id: e.target.value })}
-      />
+                <label>Responsável</label>
+                <input
+                  type="text"
+                  value={selectedTask.user_id}
+                  onChange={(e) => setSelectedTask({ ...selectedTask, user_id: e.target.value })}
+                />
 
-      {/* Campo de categoria */}
-      <label>Categoria</label>
-      <input
-        type="text"
-        value={selectedTask.category_id}
-        onChange={(e) => setSelectedTask({ ...selectedTask, category_id: e.target.value })}
-      />
+                <label>Categoria</label>
+                <input
+                  type="text"
+                  value={selectedTask.category_id}
+                  onChange={(e) => setSelectedTask({ ...selectedTask, category_id: e.target.value })}
+                />
+                <label>Arquivo</label>
+                <input
+                  type="file"
+                  onChange={(e) => setSelectedTask({ ...selectedTask, file: e.target.files[0] })}
+                />
                 <button onClick={editTask}>Salvar Alterações</button>
               </>
             ) : (
               <>
-                <h2>{selectedTask.title}</h2>
+                <label>Título</label>
+                <p>{selectedTask.title}</p>
+                <label>Descrição</label>
                 <p>{selectedTask.description}</p>
-                <p>Data de Criação: {new Date(selectedTask.created_at).toLocaleDateString()}</p>
+
+                <label>Data da Entrega</label>
                 <p>Data de Entrega: {new Date(selectedTask.due_date).toLocaleDateString()}</p>
-                <p>Status: {selectedTask.status}</p>
-                <p>Prioridade: {selectedTask.task_list_id}</p>
+                <label>Status</label>
+                <p>Status: {selectedTask.task_list_id}</p>
+                <label>Prioridade</label>
+                <p>Prioridade: {selectedTask.priority}</p>
+                <label>Responsável</label>
                 <p>Responsável: {selectedTask.user_id}</p>
+                <label>Categoria</label>
                 <p>Categoria: {selectedTask.category_id}</p>
+                <label>Arquivo</label>
                 <p>Arquivo: {selectedTask.file_path}</p>
               </>
             )}
@@ -247,6 +301,8 @@ const fetchUsers = async () => {
               {isEditing ? 'Cancelar Edição' : 'Editar Tarefa'}
             </button>
             {!isEditing && <button onClick={() => deleteTask(selectedTask.id)}>Apagar Tarefa</button>}
+            <label>Data da Criação</label>
+            <p>Data de Criação: {new Date(selectedTask.created_at).toLocaleDateString()}</p>
           </div>
         </div>
       )}
@@ -314,6 +370,7 @@ const fetchUsers = async () => {
         </div>
       )}
     </div>
+    </>
   );
 };
 

@@ -36,7 +36,7 @@ const LoaderRelatorios = ({
       const y3 = y2 + padding / 2 + height2
 
       list.push(
-        <>
+        <React.Fragment key={`${i}-${j}`}>
           <rect
             x={x}
             y={y1}
@@ -54,7 +54,7 @@ const LoaderRelatorios = ({
             width={itemWidth * 0.6}
             height={height3}
           />
-        </>
+        </React.Fragment>
       )
 
       if (i === row) {
