@@ -22,7 +22,7 @@ function App() {
             <Route path="kanban/dashboard" element={<Boards myUserId={id}/>} />
             <Route path="kanban/groups" element={<Equipes id={id}/>} />
             <Route path="kanban/reports" element={<Relatorios id={id}/>} />
-            <Route path="kanban/myProfile" element={<Ajustes id={id}/>} />
+            <Route path="kanban/myProfile" element={<Ajustes myUserId={id}/>} />
             <Route path="kanban/help" element={<Help id={id}/>} />
           </Routes>
         </div>
