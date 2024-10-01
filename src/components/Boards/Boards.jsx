@@ -251,7 +251,9 @@ const fetchListTask = async () => {
         <div className="kanban-column" key={listTaskName.name}>
                 <div className="column-header">
                 <h2 value={listTaskName.name}>
-                  {listTaskName.name} <span>{(tasks.filter(tarefa => tarefa.task_list_name === `${listTaskName.name}`)).length}</span>
+                  {listTaskName.name} 
+                  {/* <span>{(tasks.filter(tarefa => tarefa.task_list_name === `${listTaskName.name}`)).length}</span> */}
+
                 </h2>
                 <button className="add-task-button" onClick={() => setShowNewTaskModal(true)}>
                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" fill='#333333'><path d="M256 80c0-17.7-14.3-32-32-32s-32 14.3-32 32l0 144L48 224c-17.7 0-32 14.3-32 32s14.3 32 32 32l144 0 0 144c0 17.7 14.3 32 32 32s32-14.3 32-32l0-144 144 0c17.7 0 32-14.3 32-32s-14.3-32-32-32l-144 0 0-144z"/></svg>
@@ -265,9 +267,22 @@ const fetchListTask = async () => {
       {showTaskModal && selectedTask && (
         <div className="modal">
           <div className="modal-content">
+            {/* Editar */}
             {isEditing ? (
               <>
-                <h2>Editar Tarefa</h2>
+              
+              <div className='edicao'>
+                {/* <div className='edicaoBut'>
+                    <button className='fechar'  onClick={() => setShowTaskModal(false)}>
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width={18}><path d="M256 512A256 256 0 1 0 256 0a256 256 0 1 0 0 512zM175 175c9.4-9.4 24.6-9.4 33.9 0l47 47 47-47c9.4-9.4 24.6-9.4 33.9 0s9.4 24.6 0 33.9l-47 47 47 47c9.4 9.4 9.4 24.6 0 33.9s-24.6 9.4-33.9 0l-47-47-47 47c-9.4 9.4-24.6 9.4-33.9 0s-9.4-24.6 0-33.9l47-47-47-47c-9.4-9.4-9.4-24.6 0-33.9z"/></svg>
+                    </button>
+                    
+                    
+                
+                    <button className='salvar' onClick={editTask} >
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width={18}><path d="M256 512A256 256 0 1 0 256 0a256 256 0 1 0 0 512zM369 209L241 337c-9.4 9.4-24.6 9.4-33.9 0l-64-64c-9.4-9.4-9.4-24.6 0-33.9s24.6-9.4 33.9 0l47 47L335 175c9.4-9.4 24.6-9.4 33.9 0s9.4 24.6 0 33.9z"/></svg>
+                    </button>
+                </div> */}
                 <label>Título</label>
                 <input
                   type="text"
@@ -340,9 +355,7 @@ const fetchListTask = async () => {
                     ))}
                   </ul>
                 )}
-
                 </div>
-
                 <div style={{ position: 'relative', marginBottom: '20px' }}>
                   <label>Categoria</label>
                   <input
@@ -377,53 +390,78 @@ const fetchListTask = async () => {
                       ))}
                     </ul>
                   )}
-                </div>
+                 </div>
 
                 <label>Arquivo</label>
                 <input
                   type="file"
-                  onChange={(e) => setSelectedTask({ ...selectedTask, file: e.target.files[0] })}
+                  onChange={(e) => setSelectedTask({ ...selectedTask, file: e.target.files[0] })} 
                 />
-                <button onClick={editTask}>Salvar Alterações</button>
+                
+            </div>
               </>
+            
             ) : (
+                // Exibir
               <>
-                <label>Título</label>
-                <p>{selectedTask.title}</p>
-                <label>Descrição</label>
-                <p>{selectedTask.description}</p>
+                <div className='exibir'>
+                    <label>Título:</label>
+                    <p>{selectedTask.title}</p>
+                    <label>Descrição:</label>
+                    <p>{selectedTask.description}</p>
 
-                <label>Data da Entrega</label>
-                <p>Data de Entrega: {new Date(selectedTask.due_date).toLocaleDateString()}</p>
-                <label>Status</label>
-                <p>Status: {selectedTask.task_list_id}</p>
-                <label>Prioridade</label>
-                <p>Prioridade: {selectedTask.priority}</p>
-                <label>Responsável</label>
-                <p>Responsável: {selectedTask.user_id}</p>
-                <label>Categoria</label>
-                <p>Categoria: {selectedTask.category_id}</p>
-                <label>Arquivo</label>
-                <p>Arquivo: {selectedTask.file_path}</p>
+                    <label>Data da Entrega:</label>
+                    <p>{new Date(selectedTask.due_date).toLocaleDateString()}</p>
+                    <label>Status:</label>
+                    <p>{selectedTask.task_list_id}</p>
+                    <label>Prioridade:</label>
+                    <p>{selectedTask.priority}</p>
+                    <label>Responsável:</label>
+                    <p>{selectedTask.user_id}</p>
+                    <label>Categoria:</label>
+                    <p>{selectedTask.category_id}</p>
+                    <label>Arquivo:</label>
+                    <p>{selectedTask.file_path}</p>
+                </div>
               </>
-            )}
+            )}      
+                <aside className='but'>
+                {/* <button onClick={editTask}>Salvar alterações</button> */}
 
-            <button onClick={() => setShowTaskModal(false)}>Fechar</button>
-            <button onClick={() => setIsEditing(!isEditing)}>
-              {isEditing ? 'Cancelar Edição' : 'Editar Tarefa'}
-            </button>
-            {!isEditing && <button onClick={() => deleteTask(selectedTask.id)}>Apagar Tarefa</button>}
-            <label>Data da Criação</label>
-            <p>Data de Criação: {new Date(selectedTask.created_at).toLocaleDateString()}</p>
+                    <button className='fechar'  onClick={() => setShowTaskModal(false)}>
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width={18}><path d="M256 512A256 256 0 1 0 256 0a256 256 0 1 0 0 512zM175 175c9.4-9.4 24.6-9.4 33.9 0l47 47 47-47c9.4-9.4 24.6-9.4 33.9 0s9.4 24.6 0 33.9l-47 47 47 47c9.4 9.4 9.4 24.6 0 33.9s-24.6 9.4-33.9 0l-47-47-47 47c-9.4 9.4-24.6 9.4-33.9 0s-9.4-24.6 0-33.9l47-47-47-47c-9.4-9.4-9.4-24.6 0-33.9z"/></svg>
+                    </button>
+
+                    {!isEditing ? (
+                        <button className='editar' onClick={() => setIsEditing(true)}>
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width={18}><path d="M362.7 19.3L314.3 67.7 444.3 197.7l48.4-48.4c25-25 25-65.5 0-90.5L453.3 19.3c-25-25-65.5-25-90.5 0zm-71 71L58.6 323.5c-10.4 10.4-18 23.3-22.2 37.4L1 481.2C-1.5 489.7 .8 498.8 7 505s15.3 8.5 23.7 6.1l120.3-35.4c14.1-4.2 27-11.8 37.4-22.2L421.7 220.3 291.7 90.3z"/></svg>
+                        </button>
+                    ) : (
+                        <>
+                            <button onClick={() => setIsEditing(false)}>
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width={18}><path d="M512 256A256 256 0 1 0 0 256a256 256 0 1 0 512 0zM215 127c9.4-9.4 24.6-9.4 33.9 0s9.4 24.6 0 33.9l-71 71L392 232c13.3 0 24 10.7 24 24s-10.7 24-24 24l-214.1 0 71 71c9.4 9.4 9.4 24.6 0 33.9s-24.6 9.4-33.9 0L103 273c-9.4-9.4-9.4-24.6 0-33.9L215 127z"/></svg>
+                            </button>
+                            <button onClick={editTask}>
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width={18}><path d="M256 512A256 256 0 1 0 256 0a256 256 0 1 0 0 512zM369 209L241 337c-9.4 9.4-24.6 9.4-33.9 0l-64-64c-9.4-9.4-9.4-24.6 0-33.9s24.6-9.4 33.9 0l47 47L335 175c9.4-9.4 24.6-9.4 33.9 0s9.4 24.6 0 33.9z"/></svg>
+                            </button>
+                        </>
+                    )}
+
+                    {!isEditing && <button className='excluir' onClick={() => deleteTask(selectedTask.id)}>
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="size-6" width={18}>
+                        <path fillRule="evenodd" d="M16.5 4.478v.227a48.816 48.816 0 0 1 3.878.512.75.75 0 1 1-.256 1.478l-.209-.035-1.005 13.07a3 3 0 0 1-2.991 2.77H8.084a3 3 0 0 1-2.991-2.77L4.087 6.66l-.209.035a.75.75 0 0 1-.256-1.478A48.567 48.567 0 0 1 7.5 4.705v-.227c0-1.564 1.213-2.9 2.816-2.951a52.662 52.662 0 0 1 3.369 0c1.603.051 2.815 1.387 2.815 2.951Zm-6.136-1.452a51.196 51.196 0 0 1 3.273 0C14.39 3.05 15 3.684 15 4.478v.113a49.488 49.488 0 0 0-6 0v-.113c0-.794.609-1.428 1.364-1.452Zm-.355 5.945a.75.75 0 1 0-1.5.058l.347 9a.75.75 0 1 0 1.499-.058l-.346-9Zm5.48.058a.75.75 0 1 0-1.498-.058l-.347 9a.75.75 0 0 0 1.5.058l.345-9Z" clipRule="evenodd" />
+                    </svg>
+                    </button>}
+
+                </aside>
+            <p className='criacao'><em>Criado em: {new Date(selectedTask.created_at).toLocaleDateString()}</em></p>
           </div>
         </div>
       )}
-
       {/* Modal para criar nova tarefa */}
       {showNewTaskModal && (
         <div className="modal">
           <div className="modal-content">
-            <h2>Criar Nova Tarefa</h2>
             <label>Título</label>
             <input
               type="text"

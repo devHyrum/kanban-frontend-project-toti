@@ -1,4 +1,9 @@
- .user-info {
+.ajustes-conteudo{
+  overflow-x: auto;
+  scroll-behavior: smooth; 
+  height: calc(100vh - 9rem);
+}
+.user-info {
     display: flex;
     align-items: flex-start;
     gap: 1.2em;
@@ -9,6 +14,7 @@
     border: none;
     float: right;
     color: #333;
+    cursor: pointer; /* Adiciona o cursor pointer para indicar interatividade */
   }
   
   .image{
@@ -84,10 +90,10 @@
     text-decoration: none; 
     display: inline-block; 
     font-size: 16px;
-    margin: 4px 2px;  
+    margin: 8px 2px;  
     border-radius: 5px; 
     transition: background-color 0.3s, transform 0.2s;
-    margin-left: 90%; 
+    margin-left: calc(100% - 4.5rem); 
 }
 
 .btn-salvar:active {
@@ -104,7 +110,6 @@
   text-align: center;
   position: relative;
   bottom: 0;
-  width: 100%;
   font-family: 'Arial', sans-serif;
 }
 
@@ -118,15 +123,35 @@
 }
 
 /* Estilo responsivo para telas menores */
-@media (max-width: 768px) {
-  .footer-meu-perfil {
-    padding: 15px;
+@media (width <= 768px) {
+  .ajustes-conteudo{
+    height: calc(100vh - 5.9rem);
   }
-
-  .footer-meu-perfil .creation-date {
-    font-size: 12px;
-  }
+  .user-info {
+    flex-direction: column; /* Coloca a imagem e os inputs em formato de coluna */
+    align-items: center; /* Centraliza o conteúdo */
 }
+
+.image {
+    width: 50%; /* A imagem ocupa toda a largura disponível */
+    max-width: 250px; /* Limite de tamanho para evitar imagens muito grandes */
+    margin-bottom: 1.5em; /* Espaçamento entre imagem e formulário */
+}
+
+.input-container {
+    width: 100%; /* Inputs ocupam toda a largura disponível */
+}
+
+.footer-meu-perfil {
+    padding: 1em; /* Ajuste no padding */
+}
+
+.footer-meu-perfil .creation-date {
+    font-size: 12px; /* Tamanho de texto reduzido para telas menores */
+}
+}
+
+
 .rol{
   display: none;
 }

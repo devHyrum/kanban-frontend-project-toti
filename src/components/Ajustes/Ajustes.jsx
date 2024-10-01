@@ -1,12 +1,14 @@
-import React, { useState, useEffect } from 'react';
+import React, { useContext, useState, useEffect } from 'react';
 import LoaderAjustes from '../loadings/LoaderAjustes.jsx';
 import './Ajustes.css';
 import axios from 'axios'
+import UserContext from '../../context/UserContext.jsx';
 
 const formatarData = (dataISO) => {
   const data = new Date(dataISO);
   return data.toLocaleDateString('pt-BR', { timeZone: 'UTC' });
 };
+
 function habilitarInput(inputId) {
   const inputElement = document.getElementById(inputId);
   const saveButton = document.getElementById('btn-salvar');
@@ -18,6 +20,8 @@ function habilitarInput(inputId) {
   }
 };
 export default function Ajustes({ userId, myUserId }) { // Recebe o ID do usuário como prop
+  const { user, setUser } = useContext(UserContext);
+
   const [mensagemSucesso, setMensagemSucesso] = useState('');
   const [showMensagem, setShowMensagem] = useState(false);
   const [imagem, setImagem] = useState(null);  // Estado para a imagem selecionada
@@ -80,11 +84,11 @@ export default function Ajustes({ userId, myUserId }) { // Recebe o ID do usuár
       // Atualizar a imagem do perfil com a nova URL (após o upload)
       if (imagem) {
         const newImageUrl = `http://localhost:3000/users/${userData.idUserImage}/image`;
-        setUserData((prevData) => ({
-            ...prevData,
-            userphoto: newImageUrl,
+        setUser((prevUser) => ({
+          ...prevUser,
+          user_photo: newImageUrl,
         }));
-    }
+      }
     } catch (error) {
       console.error('Erro ao salvar os dados:', error);
       setMensagemSucesso('Erro ao salvar os dados. Tente novamente.');
@@ -117,6 +121,9 @@ export default function Ajustes({ userId, myUserId }) { // Recebe o ID do usuár
     botao.disabled = true;
     imageProfile.disabled = true;
     botao.style.backgroundColor = 'gray'; 
+
+    // Mantenha o input de imagem habilitado para permitir novos uploads
+    imageProfile.disabled = false; 
   };
 
   // Efeito para buscar os dados do usuário ao montar o componente
@@ -137,6 +144,7 @@ export default function Ajustes({ userId, myUserId }) { // Recebe o ID do usuár
             });
 
             console.log(userData.userphoto)
+            setUser(response.data);
             const timer = setTimeout(() => {
               setLoading(false); 
             }, 2000);
@@ -148,11 +156,11 @@ export default function Ajustes({ userId, myUserId }) { // Recebe o ID do usuár
     };
 
     fetchData();
-}, [userId]);
+}, [userId,myUserId, setUser]);
 
 
   return (
-    <div>
+    <div className='ajustes-conteudo'>
       {loading ? (
         <LoaderAjustes/>):
         (
@@ -162,21 +170,24 @@ export default function Ajustes({ userId, myUserId }) { // Recebe o ID do usuár
               <p className="mensagem-sucesso">{mensagemSucesso}</p>
             )}
             <div className="user-info">
+              
               <div className='image'>
               <img id='profile' 
                 src={previewImage || `http://localhost:3000/users/${userData.idUserImage}/image`} 
                 alt="Profile Photo" 
               />
 
-                {/* <button onClick={() => document.getElementById('profile-image-input').click()}>
-alterar
-                </button> */}
+                <button onClick={() => document.getElementById('profile-image-input').click()}>
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor"  width={25}>
+                    <path strokeLinecap="round" strokeLinejoin="round" d="m16.862 4.487 1.687-1.688a1.875 1.875 0 1 1 2.652 2.652L10.582 16.07a4.5 4.5 0 0 1-1.897 1.13L6 18l.8-2.685a4.5 4.5 0 0 1 1.13-1.897l8.932-8.931Zm0 0L19.5 7.125M18 14v4.75A2.25 2.25 0 0 1 15.75 21H5.25A2.25 2.25 0 0 1 3 18.75V8.25A2.25 2.25 0 0 1 5.25 6H10" />
+                  </svg>
+                </button>
 
                 <input 
                   type="file" 
                   id="profile-image-input" 
                   accept="image/*"
-                  // style={{ display: 'none' }}  // Escondido
+                  style={{ display: 'none' }}  // Escondido
                   onChange={handleImageChange}  onClick={() => habilitarInput('imageProfile')} // Atualiza a imagem quando o arquivo é selecionado
                 />
               </div>
@@ -186,7 +197,9 @@ alterar
                   <label htmlFor="bio" className="floating-label">
                     Biografia
                     <button type='button' onClick={() => habilitarInput('bio')}>
-alterar
+                      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="size-6" width={17}>
+                      <path strokeLinecap="round" strokeLinejoin="round" d="m16.862 4.487 1.687-1.688a1.875 1.875 0 1 1 2.652 2.652L6.832 19.82a4.5 4.5 0 0 1-1.897 1.13l-2.685.8.8-2.685a4.5 4.5 0 0 1 1.13-1.897L16.863 4.487Zm0 0L19.5 7.125" />
+                      </svg>
                     </button>
                   </label>
                   <textarea id="bio" className="floating-input auto-expand" maxLength="400" onChange={handleChange} value={userData.bio} rows="4" placeholder=" "  disabled></textarea>
@@ -196,7 +209,9 @@ alterar
                   <label htmlFor="nome"  className="floating-label">
                     Nome
                     <button type='button' onClick={() => habilitarInput('nome')}>
-alterar
+                      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="size-6" width={17}>
+                      <path strokeLinecap="round" strokeLinejoin="round" d="m16.862 4.487 1.687-1.688a1.875 1.875 0 1 1 2.652 2.652L6.832 19.82a4.5 4.5 0 0 1-1.897 1.13l-2.685.8.8-2.685a4.5 4.5 0 0 1 1.13-1.897L16.863 4.487Zm0 0L19.5 7.125" />
+                      </svg>
                     </button>
                   </label>
                   <input type="text" id="nome" className="floating-input" onChange={handleChange} value={userData.nome}  placeholder="" disabled/>
@@ -206,7 +221,9 @@ alterar
                   <label htmlFor="email"  className="floating-label">
                     E-mail
                     <button  type='button' onClick={() => habilitarInput('email')}>
-alterar
+                      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="size-6" width={17}>
+                      <path strokeLinecap="round" strokeLinejoin="round" d="m16.862 4.487 1.687-1.688a1.875 1.875 0 1 1 2.652 2.652L6.832 19.82a4.5 4.5 0 0 1-1.897 1.13l-2.685.8.8-2.685a4.5 4.5 0 0 1 1.13-1.897L16.863 4.487Zm0 0L19.5 7.125" />
+                      </svg>
                     </button>
                   </label>
                   <input type="email" id="email" className="floating-input" onChange={handleChange} value={userData.email}  placeholder=" " disabled/>
@@ -216,7 +233,9 @@ alterar
                   <label htmlFor="profissao"  className="floating-label">
                     Profissão
                     <button type='button' onClick={() => habilitarInput('profissao')}>
-alterar
+                      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="size-6" width={17}>
+                      <path strokeLinecap="round" strokeLinejoin="round" d="m16.862 4.487 1.687-1.688a1.875 1.875 0 1 1 2.652 2.652L6.832 19.82a4.5 4.5 0 0 1-1.897 1.13l-2.685.8.8-2.685a4.5 4.5 0 0 1 1.13-1.897L16.863 4.487Zm0 0L19.5 7.125" />
+                      </svg>
                     </button>
                   </label>
                   <input type="text" id="profissao" className="floating-input" onChange={handleChange} value={userData.profissao}  placeholder=" " disabled/>
@@ -227,7 +246,6 @@ alterar
               <input type="text" id="rol" className='rol' value={userData.rol} onChange={handleChange}/>
             </div>
             
-
             <div className='footer-meu-perfil'>
               <p className='creation-date'>© 2024 Kanban</p>
               <span type="text" id="profissao" className="creation-date"   placeholder=" " disabled> Perfil criado em: {userData.criacao}</span>

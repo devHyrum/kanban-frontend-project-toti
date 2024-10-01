@@ -2,7 +2,7 @@
     display: flex;
     gap: 16px;
     overflow: hidden;
-    height: calc(100vh - 8.5rem);
+    height: calc(100vh - 7.7rem);
     /* width: calc(100vw - 20rem); */
   }
   
@@ -109,7 +109,8 @@
     width: 35px;
     height: 35px;
     border-radius: 50%;
-   
+    padding-right: 4px;
+    
   }
   .modal {
     position: fixed;
@@ -121,49 +122,174 @@
     align-items: center;
     justify-content: center;
     background-color: rgba(0, 0, 0, 0.5);
-  }
-  
-  .modal-content {
-    background-color: #fff;
+}
+
+.modal-content {
+    max-height: 90%;
+    background-color: #d8c4fa;
     padding: 20px;
     border-radius: 8px;
     width: 400px;
     max-width: 90%;
-  }
-  
-  .modal-content label {
+    border-top: 1em solid rgb(0, 0, 0);;
+    color: #3f3e3e;
+    position: relative;
+}
+
+
+.modal-content label {
     display: block;
     margin-top: 10px;
     font-weight: bold;
-  }
-  
-  .modal-content input,
-  .modal-content textarea,
-  .modal-content select {
-    width: 100%;
+    color: rgb(33, 33, 33);
+    margin-left: 0.3rem;
+}
+
+.modal-content input,
+.modal-content textarea,
+.modal-content select {
+    width: 90%;
     padding: 8px;
     margin-top: 5px;
     border-radius: 4px;
     border: 1px solid #ddd;
-  }
-  
-  .modal-content button {
-    margin-top: 15px;
-    padding: 8px 12px;
-    background-color: #007bff;
-    color: white;
-    border: none;
+}
+
+
+.modal-content input {
+    font-style: italic;
+}
+
+.modal-content button {
+    padding: 0.2em 0.2em;
     border-radius: 4px;
     cursor: pointer;
-  }
-  
-  .modal-content button:last-child {
-    background-color: #dc3545;
-  }
+ /* Espaçamento entre botões */
+}
+
+/* Início da Estilização do Modal de Editar */
+.edicaoBut{
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  gap: 1em;
+}
+.modal-content .salvar{
+  background-color: transparent;
+  margin: 0 0 0 27em;
+  display: block;
+  border: 1px solid transparent;
+}
+.edicao .fechar{
+  background-color: transparent;
+  margin: 0 0 0 27em;
+  display: block;
+  border: 1px solid transparent;
+}
+
+.edicao .voltar{
+  background-color: transparent;
+  margin: 0 0 0 27em;
+  display: block;
+  border: 1px solid transparent;
+}
+
+.edicao{
+
+  padding-left: 1rem; /* Opcional: Adiciona um preenchimento interno */
+  padding-right: 1rem;
+
+}
+.edicao input{
+  width: 90%;
+  transition: background-color 0.3s, border-color 0.3s;
+}
+.edicao input:hover{
+  background-color: #f0f0f0; /* Cor de fundo ao passar o mouse */
+  border-color: #825ae5; /* Cor da borda ao passar o mouse */
+}
+
+.edicaoBut .fechar:hover{
+  color: #434242;
+  border: 1px solid #434242;
+  scale: 1.1;
+} 
+
+.edicaoBut .salvar:hover{
+  border: 1px solid #000000;
+  scale: 1.1;
+} 
+
+.edicaoBut .voltar:hover{
+  border: 1px solid #000000;
+  scale: 1.1;
+}
+
+/* Estilização Modal de exibição... */
+.but {
+  position: absolute; /* Permite que o aside se posicione em relação ao modal */
+  top: 1rem; /* Distância do topo */
+  right: 1rem; /* Distância da direita */
+  display: flex;
+  flex-direction: column; /* Alinha os botões em coluna */
+  gap: 1em; /* Espaçamento entre os botões */
+  border-radius: 8px; /* Adiciona cantos arredondados (opcional) */
+}
+
+.but button {
+  background-color: transparent;
+  border: 1px solid transparent;
+  color: white; /* Cor do texto do botão (opcional) */
+  cursor: pointer; /* Muda o cursor ao passar sobre o botão */
+}
+
+.but button:hover{
+  scale: 1.1;
+}
+.but .fechar:hover{
+  color: #434242;
+  border: 1px solid #434242;
+}
+.but .editar:hover{
+  color: #4a238e;
+  border: 1px solid #4a238e;
+}
+.but .excluir:hover{
+  color: #ed3a51;
+  border:1px solid #ed3a51;
+}
+
+
+.exibir {
+  display: flex;
+  flex-direction: column; /* Alinha os itens na vertical */
+
+}
+.exibir label{
+  display: inline-block;
+  width: 82%;
+
+}
+.exibir p{
+  width: 82%;
+  font-size: 0.9rem;
+  padding: 8px;
+  margin-top: 5px;
+  border-radius: 4px;
+  border: 1px solid #aaa;
+}
+
+.criacao{
+  display: block;
+  float: right;
+  font-size: 0.7rem;
+  margin: 1rem;
+}
+/* Fim da Estilização Modal de exibição */
 
 @media(width <= 768px){
   .kanban-board{
-    height: calc(100vh - 5.9rem);
+    height: calc(100vh - 5.5rem);
     width: calc(100vw - 5rem);
     overflow-x: auto;
     scroll-behavior: smooth; 

@@ -1,10 +1,12 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useContext } from 'react';
 import { Link, useLocation,  } from 'react-router-dom';
 import './Header.css';
+import UserContext from '../../context/UserContext.jsx';
+
 import userTest from './userTest.png'
 
 export default function Header({userId}) {
-  const [user, setUser] = useState(null);  // Estado para armazenar as informações do usuário
+  const { user, setUser } = useContext(UserContext);
 
   const location = useLocation();
 

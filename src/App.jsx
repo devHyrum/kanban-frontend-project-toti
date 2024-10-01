@@ -8,11 +8,14 @@ import Ajustes from "./components/Ajustes/Ajustes.jsx";
 import Header from "./components/Header/Header.jsx";
 import Welcome from "./components/Welcome/Welcome.jsx";
 import Help from "./components/Help/Help.jsx";
+import { UserProvider } from './context/UserContext.jsx';
 
 function App() {
   const { id } = useParams()
   return (
     <>
+    <UserProvider>
+
       <div className="app">
         <Sidebar id={id}/>
         <div className="content">
@@ -27,6 +30,7 @@ function App() {
           </Routes>
         </div>
       </div>
+    </UserProvider>
     </>
   );
 }
