@@ -250,14 +250,13 @@ const fetchListTask = async () => {
       {listTask.map((listTaskName) => (
         <div className="kanban-column" key={listTaskName.name}>
                 <div className="column-header">
-                <h2 value={listTaskName.name}>
+                  <h2 value={listTaskName.name}>
                   {listTaskName.name} 
-                  {/* <span>{(tasks.filter(tarefa => tarefa.task_list_name === `${listTaskName.name}`)).length}</span> */}
-
-                </h2>
-                <button className="add-task-button" onClick={() => setShowNewTaskModal(true)}>
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" fill='#333333'><path d="M256 80c0-17.7-14.3-32-32-32s-32 14.3-32 32l0 144L48 224c-17.7 0-32 14.3-32 32s14.3 32 32 32l144 0 0 144c0 17.7 14.3 32 32 32s32-14.3 32-32l0-144 144 0c17.7 0 32-14.3 32-32s-14.3-32-32-32l-144 0 0-144z"/></svg>
-                </button>
+                  <span>{(tasks.filter(tarefa => tarefa.task_list_name === `${listTaskName.name}`)).length}</span>
+                  </h2>
+                  <button className="add-task-button" onClick={() => setShowNewTaskModal(true)}>
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" fill='#333333'><path d="M256 80c0-17.7-14.3-32-32-32s-32 14.3-32 32l0 144L48 224c-17.7 0-32 14.3-32 32s14.3 32 32 32l144 0 0 144c0 17.7 14.3 32 32 32s32-14.3 32-32l0-144 144 0c17.7 0 32-14.3 32-32s-14.3-32-32-32l-144 0 0-144z"/></svg>
+                  </button>
                 </div>
                 {renderColumns(`${listTaskName.name}`)}
         </div>
@@ -267,22 +266,11 @@ const fetchListTask = async () => {
       {showTaskModal && selectedTask && (
         <div className="modal">
           <div className="modal-content">
-            {/* Editar */}
+            {/* Modal de Editar */}
             {isEditing ? (
               <>
               
               <div className='edicao'>
-                {/* <div className='edicaoBut'>
-                    <button className='fechar'  onClick={() => setShowTaskModal(false)}>
-                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width={18}><path d="M256 512A256 256 0 1 0 256 0a256 256 0 1 0 0 512zM175 175c9.4-9.4 24.6-9.4 33.9 0l47 47 47-47c9.4-9.4 24.6-9.4 33.9 0s9.4 24.6 0 33.9l-47 47 47 47c9.4 9.4 9.4 24.6 0 33.9s-24.6 9.4-33.9 0l-47-47-47 47c-9.4 9.4-24.6 9.4-33.9 0s-9.4-24.6 0-33.9l47-47-47-47c-9.4-9.4-9.4-24.6 0-33.9z"/></svg>
-                    </button>
-                    
-                    
-                
-                    <button className='salvar' onClick={editTask} >
-                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width={18}><path d="M256 512A256 256 0 1 0 256 0a256 256 0 1 0 0 512zM369 209L241 337c-9.4 9.4-24.6 9.4-33.9 0l-64-64c-9.4-9.4-9.4-24.6 0-33.9s24.6-9.4 33.9 0l47 47L335 175c9.4-9.4 24.6-9.4 33.9 0s9.4 24.6 0 33.9z"/></svg>
-                    </button>
-                </div> */}
                 <label>Título</label>
                 <input
                   type="text"
@@ -398,11 +386,12 @@ const fetchListTask = async () => {
                   onChange={(e) => setSelectedTask({ ...selectedTask, file: e.target.files[0] })} 
                 />
                 
-            </div>
+              </div>
+              
               </>
             
             ) : (
-                // Exibir
+                // Modal de exibir detalhes de uma tarefa
               <>
                 <div className='exibir'>
                     <label>Título:</label>
@@ -424,10 +413,10 @@ const fetchListTask = async () => {
                     <p>{selectedTask.file_path}</p>
                 </div>
               </>
-            )}      
+            )}
+               {/* Botões de edição */}
                 <aside className='but'>
                 {/* <button onClick={editTask}>Salvar alterações</button> */}
-
                     <button className='fechar'  onClick={() => setShowTaskModal(false)}>
                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width={18}><path d="M256 512A256 256 0 1 0 256 0a256 256 0 1 0 0 512zM175 175c9.4-9.4 24.6-9.4 33.9 0l47 47 47-47c9.4-9.4 24.6-9.4 33.9 0s9.4 24.6 0 33.9l-47 47 47 47c9.4 9.4 9.4 24.6 0 33.9s-24.6 9.4-33.9 0l-47-47-47 47c-9.4 9.4-24.6 9.4-33.9 0s-9.4-24.6 0-33.9l47-47-47-47c-9.4-9.4-9.4-24.6 0-33.9z"/></svg>
                     </button>
@@ -438,10 +427,10 @@ const fetchListTask = async () => {
                         </button>
                     ) : (
                         <>
-                            <button onClick={() => setIsEditing(false)}>
+                            <button className='voltar' onClick={() => setIsEditing(false)}>
                             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width={18}><path d="M512 256A256 256 0 1 0 0 256a256 256 0 1 0 512 0zM215 127c9.4-9.4 24.6-9.4 33.9 0s9.4 24.6 0 33.9l-71 71L392 232c13.3 0 24 10.7 24 24s-10.7 24-24 24l-214.1 0 71 71c9.4 9.4 9.4 24.6 0 33.9s-24.6 9.4-33.9 0L103 273c-9.4-9.4-9.4-24.6 0-33.9L215 127z"/></svg>
                             </button>
-                            <button onClick={editTask}>
+                            <button className='salvar' onClick={editTask}>
                             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width={18}><path d="M256 512A256 256 0 1 0 256 0a256 256 0 1 0 0 512zM369 209L241 337c-9.4 9.4-24.6 9.4-33.9 0l-64-64c-9.4-9.4-9.4-24.6 0-33.9s24.6-9.4 33.9 0l47 47L335 175c9.4-9.4 24.6-9.4 33.9 0s9.4 24.6 0 33.9z"/></svg>
                             </button>
                         </>
@@ -462,6 +451,7 @@ const fetchListTask = async () => {
       {showNewTaskModal && (
         <div className="modal">
           <div className="modal-content">
+
             <label>Título</label>
             <input
               type="text"
@@ -577,8 +567,15 @@ const fetchListTask = async () => {
               type="file"
               onChange={(e) => setNewTask({ ...newTask, file: e.target.files[0] })}
             />
-            <button onClick={createTask}>Criar Tarefa</button>
-            <button onClick={() => setShowNewTaskModal(false)}>Cancelar</button>
+            <aside className='but'>
+                {/* <button onClick={editTask}>Salvar alterações</button> */}
+                    <button className='fechar'  onClick={() => setShowNewTaskModal(false)}>
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width={18}><path d="M256 512A256 256 0 1 0 256 0a256 256 0 1 0 0 512zM175 175c9.4-9.4 24.6-9.4 33.9 0l47 47 47-47c9.4-9.4 24.6-9.4 33.9 0s9.4 24.6 0 33.9l-47 47 47 47c9.4 9.4 9.4 24.6 0 33.9s-24.6 9.4-33.9 0l-47-47-47 47c-9.4 9.4-24.6 9.4-33.9 0s-9.4-24.6 0-33.9l47-47-47-47c-9.4-9.4-9.4-24.6 0-33.9z"/></svg>
+                    </button>
+                    <button className='salvar' onClick={createTask}>
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width={18}><path d="M256 512A256 256 0 1 0 256 0a256 256 0 1 0 0 512zM369 209L241 337c-9.4 9.4-24.6 9.4-33.9 0l-64-64c-9.4-9.4-9.4-24.6 0-33.9s24.6-9.4 33.9 0l47 47L335 175c9.4-9.4 24.6-9.4 33.9 0s9.4 24.6 0 33.9z"/></svg>
+                    </button>
+            </aside>
           </div>
         </div>
       )}

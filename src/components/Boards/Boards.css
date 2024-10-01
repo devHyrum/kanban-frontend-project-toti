@@ -2,7 +2,7 @@
     display: flex;
     gap: 16px;
     overflow: hidden;
-    height: calc(100vh - 7.7rem);
+    height: calc(100vh - 8.5rem);
     /* width: calc(100vw - 20rem); */
   }
   
@@ -125,15 +125,16 @@
 }
 
 .modal-content {
-    max-height: 90%;
     background-color: #d8c4fa;
     padding: 20px;
     border-radius: 8px;
-    width: 400px;
-    max-width: 90%;
     border-top: 1em solid rgb(0, 0, 0);;
     color: #3f3e3e;
     position: relative;
+    height: 80vh;
+    width: 50vh;
+    overflow-x: auto;
+    scroll-behavior: smooth;
 }
 
 
@@ -168,31 +169,6 @@
 }
 
 /* Início da Estilização do Modal de Editar */
-.edicaoBut{
-  position: absolute;
-  display: flex;
-  flex-direction: column;
-  gap: 1em;
-}
-.modal-content .salvar{
-  background-color: transparent;
-  margin: 0 0 0 27em;
-  display: block;
-  border: 1px solid transparent;
-}
-.edicao .fechar{
-  background-color: transparent;
-  margin: 0 0 0 27em;
-  display: block;
-  border: 1px solid transparent;
-}
-
-.edicao .voltar{
-  background-color: transparent;
-  margin: 0 0 0 27em;
-  display: block;
-  border: 1px solid transparent;
-}
 
 .edicao{
 
@@ -209,22 +185,6 @@
   border-color: #825ae5; /* Cor da borda ao passar o mouse */
 }
 
-.edicaoBut .fechar:hover{
-  color: #434242;
-  border: 1px solid #434242;
-  scale: 1.1;
-} 
-
-.edicaoBut .salvar:hover{
-  border: 1px solid #000000;
-  scale: 1.1;
-} 
-
-.edicaoBut .voltar:hover{
-  border: 1px solid #000000;
-  scale: 1.1;
-}
-
 /* Estilização Modal de exibição... */
 .but {
   position: absolute; /* Permite que o aside se posicione em relação ao modal */
@@ -239,31 +199,34 @@
 .but button {
   background-color: transparent;
   border: 1px solid transparent;
-  color: white; /* Cor do texto do botão (opcional) */
   cursor: pointer; /* Muda o cursor ao passar sobre o botão */
 }
 
-.but button:hover{
-  scale: 1.1;
-}
+
 .but .fechar:hover{
-  color: #434242;
-  border: 1px solid #434242;
+  fill: #635d5d;
 }
 .but .editar:hover{
-  color: #4a238e;
-  border: 1px solid #4a238e;
+  fill: #4a238e;
 }
-.but .excluir:hover{
-  color: #ed3a51;
-  border:1px solid #ed3a51;
+.but .excluir{
+  color: #000000;
+  &:hover{
+    color: #ed3a51;
 }
+}
+.but .salvar:hover{
+  fill: #4a238e;
+}
+.but .voltar:hover{
+  fill: #4a238e;
+}
+
 
 
 .exibir {
   display: flex;
   flex-direction: column; /* Alinha os itens na vertical */
-
 }
 .exibir label{
   display: inline-block;
@@ -283,13 +246,14 @@
   display: block;
   float: right;
   font-size: 0.7rem;
-  margin: 1rem;
+  margin-right: 1rem;
+  padding-top: 1rem;
 }
 /* Fim da Estilização Modal de exibição */
 
 @media(width <= 768px){
   .kanban-board{
-    height: calc(100vh - 5.5rem);
+    height: calc(100vh - 5.9rem);
     width: calc(100vw - 5rem);
     overflow-x: auto;
     scroll-behavior: smooth; 
@@ -301,6 +265,9 @@
     h2{
       font-size: 17px;
     }
+  }
+  .modal-content {
+    width: 70%;
   }
 }
 @media(768px <= width <= 1030px){
