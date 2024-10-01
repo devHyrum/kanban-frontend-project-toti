@@ -5,7 +5,7 @@ import './Boards.css'
 const Boards = ({myUserId}) => {
   const [tasks, setTasks] = useState([]);
   const [users, setUsers] = useState([]);
-  const [selectedTask, setSelectedTask] = useState(null); // Tarefa selecionada para exibição
+  const [selectedTask, setSelectedTask] = useState([]); // Tarefa selecionada para exibição
   const [showTaskModal, setShowTaskModal] = useState(false);
   const [isEditing, setIsEditing] = useState(false); // Define se o usuário está em modo de edição
   const [showNewTaskModal, setShowNewTaskModal] = useState(false);
@@ -13,7 +13,6 @@ const Boards = ({myUserId}) => {
   const [listTask, setListTask] = useState([]);
   const [suggestions, setSuggestions] = useState([])
   const [categorySuggestions, setCategorySuggestions] = useState([]);
-  ;
 
   const [newTask, setNewTask] = useState({
     title: '',
@@ -24,7 +23,7 @@ const Boards = ({myUserId}) => {
     user_id: '',
     category_id: '',
     task_list_id: 'Para Fazer',
-    file: null
+    file: ''
   });
 
   // Busca lista de usuários
@@ -133,7 +132,7 @@ const fetchListTask = async () => {
             'Content-Type': 'multipart/form-data',  // Garantir que o tipo de conteúdo seja multipart
           },
         });
-
+        console.log('Tarefa editada com sucesso:', response.data);
         setSelectedTask(response.data);
         setShowTaskModal(false); // Fechar o modal após edição
         fetchTasks(); // Atualizar a lista de tarefas
@@ -547,18 +546,20 @@ const fetchListTask = async () => {
                   listStyleType: 'none',
                   padding: '0',
                   margin: '0',
-                  zIndex: 1000 // Sobrepor a outros elementos
+                  zIndex: 1000
                 }}>
-                  {categorySuggestions.map((category) => (
+                  {categorySuggestions.map((category, index) => (
                     <li
-                      key={category.id}
-                      style={{ padding: '8px', cursor: 'pointer'}}
-                      onClick={() => handleCategorySuggestionClick(category)} className="sugestoes-users"
+                      key={category.id || index}  // Use o índice como fallback se não houver um id único
+                      style={{ padding: '8px', cursor: 'pointer' }}
+                      onClick={() => handleCategorySuggestionClick(category)}
+                      className="sugestoes-users"
                     >
                       {category.name}
                     </li>
                   ))}
                 </ul>
+                
               )}
             </div>
 

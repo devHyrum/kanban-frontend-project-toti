@@ -1,16 +1,15 @@
-import React, { useState } from "react";
-import logoTotiDark from "./logoTotiDark.png";
-import logoMobile from "./logoMobile.png";
-import dashboard from "./dashboard.svg";
-import equipes from "./equipes.svg";
-import relatorios from "./relatorios.svg";
-import ajustes from "./ajustes.svg";
+import React from "react";
+import ajustes from "../../../assets/Sidebar/ajustes.svg";
+import logoTotiDark from "../../../assets/Sidebar/logoTotiDark.png";
+import logoMobile from "../../../assets/Sidebar/logoMobile.png";
+import dashboard from "../../../assets/Sidebar/dashboard.svg";
+import equipes from "../../../assets/Sidebar/equipes.svg";
+import relatorios from "../../../assets/Sidebar/relatorios.svg";
+
 import { Link, NavLink } from "react-router-dom";
 import "./Sidebar.css";
 
 export default function Sidebar() {
-  const [isOpen, setIsOpen] = useState(false);
-
   return (
     <div className="sidebar">
       <picture>

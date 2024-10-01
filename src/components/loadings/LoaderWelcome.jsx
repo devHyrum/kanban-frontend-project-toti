@@ -6,8 +6,8 @@ const LoaderWelcome = props => {
     <ContentLoader
       width={730}
       height={304}
-      primaryColor="#e4e4e4"
-      secondaryColor="#d3d3d3"
+      primarycolor="#e4e4e4"
+      secondarycolor="#d3d3d3"
       {...props}
       className='LoaderWelcome'
     >

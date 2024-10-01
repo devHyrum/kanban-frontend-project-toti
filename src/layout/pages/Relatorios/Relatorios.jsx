@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import LoaderRelatorios from "../loadings/LoaderRelatorios.jsx";
+import LoaderRelatorios from "../../../components/loadings/LoaderRelatorios.jsx";
 import "./Relatorios.css";
 import axios from "axios";
 import notFoundYourTask from './notFoundYourTask.svg'

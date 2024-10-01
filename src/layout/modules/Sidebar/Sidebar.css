@@ -88,7 +88,7 @@
 
 @media (width <= 768px) {
   .logo{
-    content: url(./logoMobile.png);
+    content: url(../../../assets/Sidebar/logoMobile.png);
   }
   .sidebar {
     width: auto;

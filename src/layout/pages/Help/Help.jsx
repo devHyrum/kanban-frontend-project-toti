@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import LoaderHelp from '../loadings/LoaderHelp.jsx';
+import LoaderHelp from '../../../components/loadings/LoaderHelp.jsx';
 import help from './help.svg'
 import './Help.css'
 

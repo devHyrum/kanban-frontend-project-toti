@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import LoaderWelcome from '../loadings/LoaderWelcome';
+import LoaderWelcome from '../../../components/loadings/LoaderWelcome.jsx';
 import welcomePicture from './welcomePicture.svg'
 import './Welcome.css'
 

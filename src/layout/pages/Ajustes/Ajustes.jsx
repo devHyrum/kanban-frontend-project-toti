@@ -1,8 +1,8 @@
 import React, { useContext, useState, useEffect } from 'react';
-import LoaderAjustes from '../loadings/LoaderAjustes.jsx';
+import LoaderAjustes from '../../../components/loadings/LoaderAjustes.jsx';
 import './Ajustes.css';
 import axios from 'axios'
-import UserContext from '../../context/UserContext.jsx';
+import UserContext from '../../../context/UserContext.jsx';
 
 const formatarData = (dataISO) => {
   const data = new Date(dataISO);

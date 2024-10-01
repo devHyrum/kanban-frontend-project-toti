@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import LoaderEquipes from "../loadings/LoaderEquipes.jsx";
+import LoaderEquipes from "../../../components/loadings/LoaderEquipes.jsx";
 import Modal from "./ModalFoto.jsx"; // Importe o modal
 import './Equipes.css'
 
