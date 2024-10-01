@@ -1,7 +1,3 @@
-h2 {
-    margin-bottom: 2em;
-  } 
-
  .user-info {
     display: flex;
     align-items: flex-start;
@@ -36,11 +32,6 @@ h2 {
     margin-left: 0.3em;
   }
 
-  button:hover{
-    cursor: pointer;
-  }
-  
-  
   .input-container {
     position: relative;
     width: 100%;
@@ -74,6 +65,9 @@ h2 {
     font-size: 16px;
     color: #333;  
     margin: 0 0 0.3em 0.4em;
+    button{
+      cursor: pointer;
+    }
  }
 
  .floating-input:focus {
@@ -98,6 +92,10 @@ h2 {
 
 .btn-salvar:active {
     transform: scale(0.95);
+}
+
+.btn-salvar:enabled{
+  cursor: pointer;
 }
 
 .footer-meu-perfil {

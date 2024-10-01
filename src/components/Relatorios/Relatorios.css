@@ -46,6 +46,15 @@
   margin: 20px;
 }
 
+.relatorios-conteudo::-webkit-scrollbar {
+  width: 6px; /* Largura da barra */
+}
+
+.relatorios-conteudo::-webkit-scrollbar-thumb {
+  background: #d8c4fa; /* Cor da parte rolável */
+  border-radius: 10px; /* Arredondamento dos cantos */
+}
+
 .relatorios-card {
   background-color: white;
   border: 1px solid #ddd;

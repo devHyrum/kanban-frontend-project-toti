@@ -3,6 +3,15 @@
   scroll-behavior: smooth; 
   height: calc(100vh - 8.5rem);
 }
+.equipes-conteudo::-webkit-scrollbar {
+  width: 6px; /* Largura da barra */
+}
+
+.equipes-conteudo::-webkit-scrollbar-thumb {
+  background: #d8c4fa; /* Cor da parte rolável */
+  border-radius: 10px; /* Arredondamento dos cantos */
+}
+
 .equipe-container {
     display: flex;
     flex-direction: column;
