@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import LoaderWelcome from '../../../components/loadings/LoaderWelcome.jsx';
-import welcomePicture from './welcomePicture.svg'
+import welcomePicture from '../../../assets/Welcome/welcomePicture.svg'
 import './Welcome.css'
 
 export default function Welcome({id}) {

@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import LoaderRelatorios from "../../../components/loadings/LoaderRelatorios.jsx";
 import "./Relatorios.css";
 import axios from "axios";
-import notFoundYourTask from './notFoundYourTask.svg'
+import notFoundYourTask from '../../../assets/Relatorios/notFoundYourTask.svg'
 
 export default function Relatorios() {
   const [loading, setLoading] = useState(true);

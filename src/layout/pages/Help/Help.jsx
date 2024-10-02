@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import LoaderHelp from '../../../components/loadings/LoaderHelp.jsx';
-import help from './help.svg'
+import help from '../../../assets/Help/help.svg'
 import './Help.css'
 
 export default function Help() {
