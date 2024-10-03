@@ -41,10 +41,32 @@
   .input-container {
     position: relative;
     width: 100%;
+    div:not(:last-child) {
+      margin-bottom: 2em; 
+   }
+    [disabled]{
+      background-color: rgb(216, 195, 255);
+      border: 2px solid #9977d4;
+    }
+    input[type="email"]:invalid{
+      border: 2px solid tomato;
+      background: mistyrose;
+    }
+    input[type="email"]:valid{
+      border: 2px solid limegreen;
+      background-color: honeydew;
+    }
+    input::placeholder {
+      font-style: italic;
+      color: thistle;
+      opacity: 0.7;
+    }
+    textarea::placeholder {
+      font-style: italic;
+      color: thistle;
+      opacity: 0.7;
+    }
   }
-  .input-container div:not(:last-child) {
-    margin-bottom: 2em; 
- }
 
  .auto-expand {
     width: 100%;
@@ -59,13 +81,16 @@
     display: block;
     width: 100%;
     padding: 10px;
-    border: 1px solid #ccc;
+    border: 2px solid #cbb0f8;
     border-radius: 4px;
     outline: none;
     font-size: 16px;
     box-sizing: border-box;
+    transition: border-color 0.3s ease;
+    &:focus{
+      border-color: #7c3aed;
+    }
   }
-  
   .floating-label { 
     display: flex;
     font-size: 16px;
@@ -74,13 +99,8 @@
     button{
       cursor: pointer;
     }
+
  }
-
- .floating-input:focus {
-    border: 1px solid #aaa; 
- }
-
-
  .btn-salvar {
     background-color: #aaa; 
     color: white; 

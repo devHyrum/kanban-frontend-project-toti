@@ -202,7 +202,7 @@ export default function Ajustes({ userId, myUserId }) { // Recebe o ID do usuár
                       </svg>
                     </button>
                   </label>
-                  <textarea id="bio" className="floating-input auto-expand" maxLength="400" onChange={handleChange} value={userData.bio} rows="4" placeholder=" "  disabled></textarea>
+                  <textarea id="bio" type='text' className="floating-input auto-expand" maxLength="400" onChange={handleChange} value={userData.bio} rows="4" placeholder="Escreva sua biografia..."  disabled></textarea>
                 </div>
 
                 <div>
@@ -214,7 +214,7 @@ export default function Ajustes({ userId, myUserId }) { // Recebe o ID do usuár
                       </svg>
                     </button>
                   </label>
-                  <input type="text" id="nome" className="floating-input" onChange={handleChange} value={userData.nome}  placeholder="" disabled/>
+                  <input type="text" id="nome" className="floating-input" onChange={handleChange} value={userData.nome}  placeholder="Escreva seu nome..." disabled/>
                 </div>
                 
                 <div>
@@ -226,7 +226,7 @@ export default function Ajustes({ userId, myUserId }) { // Recebe o ID do usuár
                       </svg>
                     </button>
                   </label>
-                  <input type="email" id="email" className="floating-input" onChange={handleChange} value={userData.email}  placeholder=" " disabled/>
+                  <input type="email" id="email" className="floating-input" onChange={handleChange} value={userData.email} disabled required placeholder="Escreva seu email..."/>
                 </div>
                 
                 <div>
@@ -238,7 +238,7 @@ export default function Ajustes({ userId, myUserId }) { // Recebe o ID do usuár
                       </svg>
                     </button>
                   </label>
-                  <input type="text" id="profissao" className="floating-input" onChange={handleChange} value={userData.profissao}  placeholder=" " disabled/>
+                  <input type="text" id="profissao" className="floating-input" onChange={handleChange} value={userData.profissao}  placeholder="Escreva sua profissão..." disabled/>
                 </div>
               </div>
             </div>
