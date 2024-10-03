@@ -33,7 +33,7 @@
     width: 100px;
     height: 100px;
     object-fit: cover;
-    border: 1px solid blueviolet;
+    border: 1px solid var(--bordas-linhas-claras);
     padding: 2px;
     cursor: pointer;
   }

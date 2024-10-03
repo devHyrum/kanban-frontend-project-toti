@@ -4,6 +4,56 @@
   padding: 0;
 }
 
+/* Defina os temas com variáveis */
+:root {
+  --background-color: #7C3AED;
+  --background-pages: #fff;
+  --text-color: #000;
+  --svg-redes-sociais: #32175f;
+  --button-escolhido: #5729A6;
+  --button-escolhido-hover: #7034d5;
+  --bordas-linhas: #4a238e;
+  --bordas-linhas-claras: #8e3aed;
+}
+
+[data-theme='dark'] {
+  --background-color: #00000C;
+  --background-pages: #333;
+  --text-color: #fff;
+  --svg-redes-sociais: #1b1b1b;
+  --button-escolhido: #898989;
+  --button-escolhido-hover: #434343;
+  --bordas-linhas: #c2c2c2;
+  --bordas-linhas-claras: #d6d6d6;
+
+}
+
+[data-theme='daltonism'] {
+  --background-color: #0054A6;
+  --background-pages: #F7961F;
+  --text-color: #00236a;
+  --svg-redes-sociais: #00236a;
+  --button-escolhido: #570c00;
+  --button-escolhido-hover: #9a4800;
+  --bordas-linhas: #4e0000;
+  --bordas-linhas-claras: #003783;
+
+}
+
+body {
+  background-color: var(--background-color);
+  color: var(--text-color);
+  height: 100%;
+}
+
+h1 {
+  color: var(--text-color);
+}
+label{
+  color: var(--text-color)
+}
+
+
 .app {
   height: 100%;
   display: flex;
@@ -13,7 +63,7 @@
   flex-grow: 1;
   padding: 1rem 3rem 0rem 3rem;
   margin-top: 1rem;
-  background-color: #FBFAFF;
+  background-color: var(--background-pages);
   border-radius: 20px 0 0 0;
   height: calc(100vh - 2.1rem);
 }

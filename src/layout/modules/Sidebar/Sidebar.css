@@ -1,6 +1,6 @@
 .sidebar {
     width: 210px;
-    background-color: #7C3AED;
+    background-color: var(--background-color);
     height: (100vh-20px);
     padding: 20px;
     color: white;
@@ -17,8 +17,8 @@
       padding: 0;
       li {
         margin-bottom: 10px;
-        :hover{
-          background-color: #7034d5;
+        &:hover{
+          background-color: var(--button-escolhido-hover);
           border-radius: 10px;
           transition: all 0.3s ease-in-out;
         }
@@ -35,7 +35,7 @@
     footer {
       margin-top: auto;
       hr{
-        border: 2px solid #4a238e;
+        border: 2px solid var(--bordas-linhas);
         margin: 0.3rem 0rem 0.3rem 0rem;
       }
       .helpPage{
@@ -62,6 +62,7 @@
           margin: 5px;
           svg{
             width: 30px;
+            fill: var(--svg-redes-sociais);
             
           }
           &:hover svg{
@@ -81,7 +82,7 @@
 .active-link {
   font-size: 25px; 
   font-weight: 800; 
-  background-color: #5729a6;
+  background-color: var(--button-escolhido);
   border-radius: 10px;
   transition: all 0.3s ease-in-out;
 }

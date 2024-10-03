@@ -15,7 +15,7 @@ header{
         transition: 0.3s ease
       }
       img{
-        border: 2px solid #8e3aed;
+        border: 2px solid var(--bordas-linhas-claras);
         padding: 2px;
         border-radius: 100%;
         width: 5rem;
@@ -23,7 +23,7 @@ header{
     }
 }
 hr{
-  border: 1px solid #8e3aed;
+  border: 1px solid var(--bordas-linhas-claras);
   margin: 0.5rem 0rem 0rem 0rem;
 }
 

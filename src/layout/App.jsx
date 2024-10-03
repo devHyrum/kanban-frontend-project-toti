@@ -9,12 +9,14 @@ import Relatorios from "./pages/Relatorios/Relatorios.jsx";
 import Ajustes from "./pages/Ajustes/Ajustes.jsx";
 import Welcome from "./pages/Welcome/Welcome.jsx"
 import Help from "./pages/Help/Help.jsx";
+import { ThemeProvider } from "../context/ThemeProvider.jsx";
 
 function App() {
   const { id } = useParams();
   return (
     <>
       <UserProvider>
+      <ThemeProvider>
         <div className="app">
           <Sidebar id={id} />
           <div className="content">
@@ -24,17 +26,18 @@ function App() {
               <Route
                 path="kanban/dashboard"
                 element={<Boards myUserId={id} />}
-              />
+                />
               <Route path="kanban/groups" element={<Equipes id={id} />} />
               <Route path="kanban/reports" element={<Relatorios id={id} />} />
               <Route
                 path="kanban/myProfile"
                 element={<Ajustes myUserId={id} />}
-              />
+                />
               <Route path="kanban/help" element={<Help id={id} />} />
             </Routes>
           </div>
         </div>
+      </ThemeProvider>
       </UserProvider>
     </>
   );

@@ -147,7 +147,7 @@
   align-items: center;
   gap: 0.3rem;
   background-color: #e5d8fb;
-  border: 1px solid #cbb0f8;
+  border: 1px solid var(--bordas-linhas-claras);
   border-radius: 3rem;
   padding: 0px 0px 0px 5px;
   .user-photo {
@@ -162,7 +162,7 @@
   align-items: center;
   gap: 0.2rem;
   background-color: #e5d8fb;
-  border: 1px solid #cbb0f8;
+  border: 1px solid var(--bordas-linhas-claras);
   border-radius: 3rem;
   padding: 0px 5px 0px 5px;
   svg{
