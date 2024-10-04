@@ -7,7 +7,7 @@
   }
   
   .kanban-column {
-    background-color: #f2ebfd;
+    background-color: var(--fundo-hover);
     border-top: 1rem solid #632ebe;
     padding: 16px;
     margin-top: 1rem;
@@ -61,7 +61,7 @@
     justify-content: center;
     transition: background-color 0.3s ease;
     &:hover{
-      background-color: #f2ebfd;
+      background-color: var(--fundo-hover);
       border-color: #b089f4;
     }
     &:active{

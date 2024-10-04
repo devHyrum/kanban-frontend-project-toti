@@ -14,6 +14,7 @@
   --button-escolhido-hover: #7034d5;
   --bordas-linhas: #4a238e;
   --bordas-linhas-claras: #8e3aed;
+  --fundo-hover: #F2EBFD;
 }
 
 [data-theme='dark'] {
@@ -25,6 +26,7 @@
   --button-escolhido-hover: #434343;
   --bordas-linhas: #c2c2c2;
   --bordas-linhas-claras: #d6d6d6;
+  --fundo-hover: #111117;
 
 }
 
@@ -37,11 +39,10 @@
   --button-escolhido-hover: #9a4800;
   --bordas-linhas: #4e0000;
   --bordas-linhas-claras: #003783;
-
+  --fundo-hover: #f37354;
 }
 
 body {
-  background-color: var(--background-color);
   color: var(--text-color);
   height: 100%;
 }

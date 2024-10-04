@@ -72,7 +72,7 @@
 
 .relatorios-card:hover {
   transform: translateY(-5px);
-  background-color: #f2ebfd;
+  background-color: var(--fundo-hover);
 }
 .relatorios-description {
   max-height: 0;
