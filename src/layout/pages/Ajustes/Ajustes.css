@@ -14,11 +14,11 @@
     border: none;
     float: right;
     color: #333;
-    cursor: pointer; /* Adiciona o cursor pointer para indicar interatividade */
+    cursor: pointer;
   }
   
   .image{
-    border: 7px double #aaa;
+    border: 7px double var(--bordas-linhas-claras);
     border-radius: 0.5em;
     padding: 1em;
     width: 15rem;
@@ -45,8 +45,8 @@
       margin-bottom: 2em; 
    }
     [disabled]{
-      background-color: rgb(216, 195, 255);
-      border: 2px solid #9977d4;
+      background-color: var(--barra-scroll);
+      border: 2px solid var(--bordas-linhas-claras);
     }
     input[type="email"]:invalid{
       border: 2px solid tomato;
@@ -58,12 +58,12 @@
     }
     input::placeholder {
       font-style: italic;
-      color: thistle;
+      color: var(--barra-scroll);
       opacity: 0.7;
     }
     textarea::placeholder {
       font-style: italic;
-      color: thistle;
+      color: var(--barra-scroll);
       opacity: 0.7;
     }
   }
@@ -71,7 +71,6 @@
  .auto-expand {
     width: 100%;
     padding: 10px;
-    border: 1px solid #ccc;
     border-radius: 4px;
     resize: none;
     overflow: hidden;
@@ -81,14 +80,14 @@
     display: block;
     width: 100%;
     padding: 10px;
-    border: 2px solid #cbb0f8;
+    border: 2px solid var(--barra-scroll);
     border-radius: 4px;
     outline: none;
     font-size: 16px;
     box-sizing: border-box;
     transition: border-color 0.3s ease;
     &:focus{
-      border-color: #7c3aed;
+      border-color: var(--background-color);
     }
   }
   .floating-label { 
@@ -97,6 +96,14 @@
     margin: 0 0 0.3em 0.4em;
     button{
       cursor: pointer;
+      svg{
+        fill: var(--button-escolhido);
+        transition: transform 0.5s, fill 0.3s;
+      }
+      &:hover svg{
+        fill: var(--button-escolhido-hover);
+        transform: scale(1.3);
+      }
     }
 
  }
@@ -124,7 +131,6 @@
 }
 
 .footer-meu-perfil {
-  background-color: #f8f8f8;
   padding: 0.7em;
   text-align: center;
   position: relative;
@@ -135,7 +141,6 @@
 /* Estilo da data de criação */
 .footer-meu-perfil .creation-date {
   font-size: 14px;
-  color: #555;
   font-style: italic;
   margin-top: 10px;
   border: none;

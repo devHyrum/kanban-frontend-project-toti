@@ -8,7 +8,7 @@
 }
 
 .equipes-conteudo::-webkit-scrollbar-thumb {
-  background: #d8c4fa; /* Cor da parte rolável */
+  background: var(--barra-scroll); /* Cor da parte rolável */
   border-radius: 10px; /* Arredondamento dos cantos */
 }
 

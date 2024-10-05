@@ -91,10 +91,10 @@
     animation-range: entry 25% cover 20%;
     &:hover{
         background-color: #e5d8fb;
-        border-color: #cbb0f8;
+        border-color: var(--barra-scroll);
     }
     &:active{
-      background-color: #cbb0f8;
+      background-color: var(--barra-scroll);
     }
     .user-photo{
       width: 35px;

@@ -172,10 +172,10 @@ export default function Ajustes({ userId, myUserId }) { // Recebe o ID do usuár
             <div className="user-info">
               
               <div className='image'>
-              <img id='profile' 
+                <img id='profile' 
                 src={previewImage || `http://localhost:3000/users/${userData.idUserImage}/image`} 
                 alt="Profile Photo" 
-              />
+                />
 
                 <button onClick={() => document.getElementById('profile-image-input').click()}>
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor"  width={25}>
@@ -193,6 +193,7 @@ export default function Ajustes({ userId, myUserId }) { // Recebe o ID do usuár
               </div>
 
               <div className="input-container">
+                
                 <div>
                   <label htmlFor="bio" className="floating-label">
                     Biografia
@@ -240,6 +241,7 @@ export default function Ajustes({ userId, myUserId }) { // Recebe o ID do usuár
                   </label>
                   <input type="text" id="profissao" className="floating-input" onChange={handleChange} value={userData.profissao}  placeholder="Escreva sua profissão..." disabled/>
                 </div>
+
               </div>
             </div>
             <div>

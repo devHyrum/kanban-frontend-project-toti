@@ -14,16 +14,16 @@
   width: 100%;
   max-width: 200px;
   outline: none;
-  border: 2px solid #cbb0f8; /* Define uma borda padrão invisível */
+  border: 2px solid var(--barra-scroll); /* Define uma borda padrão invisível */
   transition: border-color 0.3s ease; /* Adiciona uma transição suave para a mudança de cor */
   &:focus{
-    border-color: #7c3aed;
+    border-color: var(--background-color);
   }
 }
 
 /* Botão de limpar filtros */
 .relatorios-clear-btn {
-  background-color: #7c3aed;
+  background-color: var(--background-color);
   color: white;
   border: none;
   padding: 10px 18px;
