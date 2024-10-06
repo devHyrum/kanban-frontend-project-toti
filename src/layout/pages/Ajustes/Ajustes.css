@@ -39,13 +39,18 @@
     width: 15rem;
     overflow: hidden; 
     position: relative;
+    img{
+        width: 100%; 
+        height: auto; 
+        object-fit: cover;
+     }
+     button{
+      position: absolute;
+      bottom: 0;
+      right: 0;
+     }
   }
 
- .image img{
-    width: 100%; 
-    height: auto; 
-    object-fit: cover;
- }
 
  .input-container button{
     background: none;

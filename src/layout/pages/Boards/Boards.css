@@ -2,10 +2,10 @@
     display: flex;
     gap: 16px;
     overflow: hidden;
-    height: calc(100vh - 8.1rem);
+    height: calc(100vh - 8.2rem);
   }
   
-  .kanban-column {
+.kanban-column {
     background: rgba(255, 255, 255, 0.05);
     border-top: 1rem solid var(--background-color);
     backdrop-filter: blur(3px);
@@ -17,16 +17,16 @@
     box-shadow: 0 4px 6px var(--sombreado);
     overflow-y: auto;
     height: full;
-  }
-
-  .kanban-column::-webkit-scrollbar {
-    width: 6px;
+    &::-webkit-scrollbar {
+      width: 6px;
+    }
+    &::-webkit-scrollbar-thumb {
+      background: var(--barra-scroll);
+      border-radius: 10px;
+    }
   }
   
-  .kanban-column::-webkit-scrollbar-thumb {
-    background: var(--barra-scroll);
-    border-radius: 10px;
-  }
+  
   
   .column-header {
     display: flex;
@@ -133,9 +133,9 @@
     background-color: var(--barra-scroll);
     padding: 20px;
     border-radius: 8px;
-    border-top: 1em solid var(--background-color);
+    border-top: 1em solid var(--button-escolhido-hover);
     position: relative;
-    height: auto;
+    height: 80vh;
     width: 50vh;
     overflow-x: auto;
     scroll-behavior: smooth;
@@ -144,10 +144,9 @@
         margin-top: 10px;
         font-weight: bold;
         color: var(--svg-redes-sociais);
-        margin-left: 0.3rem;
     }
     input, textarea, select{
-      width: 90%;
+      width: 80%;
       padding: 8px;
       margin-top: 5px;
       border-radius: 4px;
@@ -167,10 +166,6 @@
   }
 
 /* Início da Estilização do Modal de Editar */
-.edicao{
-  padding-left: 1rem;
-  padding-right: 1rem;
-}
 
 /* Estilização Modal de exibição... */
 .but {
@@ -217,13 +212,13 @@
     display: inline-block;
     width: 82%;
   }
-}
-.exibir p{
-  font-size: 0.9rem;
-  padding: 8px;
-  margin-top: 5px;
-  border-radius: 4px;
-  border: 1px solid #aaa;
+  p{
+    font-size: 0.9rem;
+    padding: 8px;
+    margin-top: 5px;
+    border-radius: 4px;
+    border: 1px solid #aaa;
+  }
 }
 
 .criacao{
