@@ -6,6 +6,7 @@ const LoaderWelcome = props => {
     <ContentLoader
       width={730}
       height={304}
+      backgroundColor='var(--fundo-hover)'
       primarycolor="#e4e4e4"
       secondarycolor="#d3d3d3"
       {...props}

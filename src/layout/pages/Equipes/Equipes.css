@@ -15,6 +15,11 @@
 .equipe-container {
     display: flex;
     flex-direction: column;
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 16px;
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+    backdrop-filter: blur(3px);
+    -webkit-backdrop-filter: blur(3px);
   }
   
   .usuario {
@@ -26,17 +31,18 @@
     &:hover{
       background-color: var(--fundo-hover);
     }
+    img {
+      border-radius: 50%;
+      width: 100px;
+      height: 100px;
+      object-fit: cover;
+      border: 1px solid var(--bordas-linhas-claras);
+      padding: 3px;
+      cursor: pointer;
+      margin: 0px 0px 0px 1rem;
+    }
   }
   
-  .usuario img {
-    border-radius: 50%;
-    width: 100px;
-    height: 100px;
-    object-fit: cover;
-    border: 1px solid var(--bordas-linhas-claras);
-    padding: 2px;
-    cursor: pointer;
-  }
   
   .usuario-info {
     display: flex;

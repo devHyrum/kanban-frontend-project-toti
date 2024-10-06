@@ -64,7 +64,8 @@ const LoaderRelatorios = ({
   }
 
   return (
-    <ContentLoader
+    <ContentLoader 
+      backgroundColor='var(--fundo-hover)'
       viewBox={`0 0 ${width} ${height}`}
       width={width}
       height={height}

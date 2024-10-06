@@ -6,7 +6,7 @@
 
 /* Defina os temas com variáveis */
 :root {
-  --background-color: #7C3AED;
+  --background-color: linear-gradient(90deg, #7C3AED 0%, #4d00d2 30%);
   --background-pages: #fff;
   --text-color: #000;
   --svg-redes-sociais: #32175f;
@@ -16,10 +16,12 @@
   --bordas-linhas-claras: #8e3aed;
   --fundo-hover: #F2EBFD;
   --barra-scroll: #d8c4fa;
+  --sombreado: rgba(0, 0, 0, 0.1);
+  --background-image: url(./assets/Relatorios/fundoLight.svg);
 }
 
 [data-theme='dark'] {
-  --background-color: #00000C;
+  --background-color: linear-gradient(90deg, #00000c 0%, #1b1b1b 70%);
   --background-pages: #1a1a24;
   --text-color: #fff;
   --svg-redes-sociais: #1b1b1b;
@@ -29,11 +31,13 @@
   --bordas-linhas-claras: #d6d6d6;
   --fundo-hover: #111117;
   --barra-scroll: #b3b3b6;
+  --sombreado: rgba(255, 255, 255, 0.07);
+  --background-image: url(./assets/Relatorios/fundoDark.svg);
 
 }
 
 [data-theme='daltonism'] {
-  --background-color: #0054A6;
+  --background-color: linear-gradient(90deg, #0054A6 0%, #003783 47%);;
   --background-pages: #F7961F;
   --text-color: #00236a;
   --svg-redes-sociais: #00236a;
@@ -43,7 +47,8 @@
   --bordas-linhas-claras: #003783;
   --fundo-hover: #f37354;
   --barra-scroll: #b3cce4;
-
+  --sombreado: rgba(32, 32, 32, 0.09);
+  --background-image: url(./assets/Relatorios/fundoDaltonism.svg);
 }
 
 body {
@@ -68,7 +73,7 @@ label{
   flex-grow: 1;
   padding: 1rem 3rem 0rem 3rem;
   margin-top: 1rem;
-  background-color: var(--background-pages);
+  background-image: var(--background-image);
   border-radius: 20px 0 0 0;
   height: calc(100vh - 2.1rem);
 }

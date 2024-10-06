@@ -2,7 +2,7 @@ import React from 'react'
 import ContentLoader from 'react-content-loader'
 
 const LoaderHelp = ({ ...rest }) => (
-  <ContentLoader height="230" width="265" viewBox="0 0 265 230" {...rest}>
+  <ContentLoader backgroundColor='var(--fundo-hover)' height="230" width="265" viewBox="0 0 265 230" {...rest}>
     <rect x="15" y="15" rx="4" ry="4" width="200" height="25" />
     <rect x="15" y="50" rx="2" ry="2" width="40" height="15" />
     <rect x="75" y="45" rx="16" ry="16" width="55" height="22" />

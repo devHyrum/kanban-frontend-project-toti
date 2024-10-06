@@ -3,7 +3,7 @@ import ContentLoader from 'react-content-loader'
 
 const LoaderEquipes = props => {
   return (
-    <ContentLoader height={1000} width={700} {...props}>
+    <ContentLoader backgroundColor='var(--fundo-hover)' height={1000} width={700} {...props}>
       <circle cx="25" cy="50" r="25" />
       <circle cx="25" cy="150" r="25" />
       <circle cx="25" cy="250" r="25" />

@@ -54,7 +54,7 @@ export default function Equipes() {
                     <img
                       src={`http://localhost:3000/users/${usuario.id}/image`}
                       alt={usuario.name}
-                      onClick={() => openModal(`http://localhost:3000/users/${usuario.id}/image`)} // Abre o modal ao clicar
+                      onClick={() => openModal(`http://localhost:3000/users/${usuario.id}/image`)}
                     />
                   ) : (
                     <p>Sem foto disponível</p>

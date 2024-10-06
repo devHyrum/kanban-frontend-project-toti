@@ -1,8 +1,11 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import LoaderRelatorios from "../../../components/loadings/LoaderRelatorios.jsx";
 import "./Relatorios.css";
 import axios from "axios";
 import notFoundYourTask from '../../../assets/Relatorios/notFoundYourTask.svg'
+import notFoundYourTaskDark from '../../../assets/Relatorios/notFoundYourTaskDark.svg'
+import notFoundYourTaskDaltonismo from '../../../assets/Relatorios/notFoundYourTaskDaltonismo.svg'
+import { ThemeContext } from "../../../context/ThemeProvider.jsx";
 
 export default function Relatorios() {
   const [loading, setLoading] = useState(true);
@@ -12,6 +15,9 @@ export default function Relatorios() {
   const [filterPriority, setFilterPriority] = useState(""); // Filtro por prioridade
   const [searchValue, setSearchValue] = useState(""); // Filtro por busca
   const [expandedTaskId, setExpandedTaskId] = useState(null); // Controla qual card está expandido
+  const { theme } = useContext(ThemeContext);
+
+  const notFoundImage = theme === 'dark' ? notFoundYourTaskDark : theme === 'daltonism' ? notFoundYourTaskDaltonismo : notFoundYourTask;
 
   // Função para buscar todas as tarefas
   const fetchTasks = async () => {
@@ -185,7 +191,7 @@ export default function Relatorios() {
                 ))
             ) : (
               <div className='notFoundYourTask-conteudo'>
-                <img src={notFoundYourTask} alt="notFoundYourTask" />
+                <img src={notFoundImage} alt="notFoundYourTask" />
                 <div>
                   <h1>Não existe a tarefa</h1>
                   <p>Tem certeza da sua busca?</p>

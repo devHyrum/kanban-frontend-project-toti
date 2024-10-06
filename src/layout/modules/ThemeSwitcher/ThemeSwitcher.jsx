@@ -1,6 +1,9 @@
 import React, { useContext } from 'react';
 import { ThemeContext } from '../../../context/ThemeProvider.jsx'; // Certifique-se de ajustar o caminho
 import './ThemeSwitcher.css'
+import light from '../../../assets/Sidebar/lightMode.svg'
+import dark from '../../../assets/Sidebar/darkMode.svg'
+import daltonismo from '../../../assets/Sidebar/daltonismoMode.svg'
 
 const ThemeSwitcher = () => {
   const { theme, toggleTheme } = useContext(ThemeContext);
@@ -8,13 +11,13 @@ const ThemeSwitcher = () => {
   return (
     <div className='theme-switcher'>
       <button onClick={() => toggleTheme('light')} disabled={theme === 'light'}>
-        Claro
+        <img src={light} alt="light" />
       </button>
       <button onClick={() => toggleTheme('dark')} disabled={theme === 'dark'}>
-        Escuro
+      <img src={dark} alt="dark" />
       </button>
       <button onClick={() => toggleTheme('daltonism')} disabled={theme === 'daltonism'}>
-        Daltonismo
+      <img src={daltonismo} alt="daltonismo" />
       </button>
     </div>
   );

@@ -242,16 +242,18 @@ export default function Ajustes({ userId, myUserId }) { // Recebe o ID do usuár
                   <input type="text" id="profissao" className="floating-input" onChange={handleChange} value={userData.profissao}  placeholder="Escreva sua profissão..." disabled/>
                 </div>
 
-              </div>
-            </div>
-            <div>
-              <input type="text" id="rol" className='rol' value={userData.rol} onChange={handleChange}/>
-            </div>
-            
             <div className='footer-meu-perfil'>
               <p className='creation-date'>© 2024 Kanban</p>
               <span type="text" id="profissao" className="creation-date"   placeholder=" " disabled> Perfil criado em: {userData.criacao}</span>
             </div>
+              </div>
+            </div>
+            
+
+            <div>
+              <input type="text" id="rol" className='rol' value={userData.rol} onChange={handleChange}/>
+            </div>
+            
 
           </>
         )}

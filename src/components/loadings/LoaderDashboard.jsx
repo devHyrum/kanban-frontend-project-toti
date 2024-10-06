@@ -7,7 +7,7 @@ const LoaderDashboard = props => {
       width={1200}
       height={400}
       viewBox="0 0 1200 400"
-      backgroundColor="#f3f3f3"
+      backgroundColor='var(--fundo-hover)'
       foregroundColor="#ecebeb"
       {...props}
     >

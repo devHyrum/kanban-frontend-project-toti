@@ -4,9 +4,16 @@
   height: calc(100vh - 9rem);
 }
 .user-info {
-    display: flex;
-    align-items: flex-start;
-    gap: 1.2em;
+  display: flex;
+  align-items: flex-start;
+  gap: 1.2em;
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 16px;
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+  backdrop-filter: blur(3px);
+  -webkit-backdrop-filter: blur(3px);
+  padding: 1rem;
+  margin: 1rem;
   }
 
   .user-info button{
@@ -95,7 +102,7 @@
     box-sizing: border-box;
     transition: border-color 0.3s ease;
     &:focus{
-      border-color: var(--background-color);
+      border-color: var(--bordas-linhas-claras);
     }
   }
   .floating-label { 
