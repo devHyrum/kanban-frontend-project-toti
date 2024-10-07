@@ -402,12 +402,24 @@ const fetchListTask = async () => {
                     <p>{new Date(selectedTask.due_date).toLocaleDateString()}</p>
                     <label>Status:</label>
                     <p>{selectedTask.task_list_id}</p>
-                    <label>Prioridade:</label>
-                    <p>{selectedTask.priority}</p>
-                    <label>Responsável:</label>
-                    <p>{selectedTask.user_id}</p>
-                    <label>Categoria:</label>
-                    <p>{selectedTask.category_id}</p>
+                    <div>
+                      <label>Prioridade:</label>
+                      <p>{selectedTask.priority}</p>
+                      <label>Responsável:</label>
+                      <p className="relatorio-usuario">
+                        <strong>{selectedTask.user_name}</strong>
+                      {selectedTask.user_photo && (
+                        <img
+                        src={`http://localhost:3000/users/${selectedTask.user_id}/image`}
+                        alt={`${selectedTask.user_photo}`}
+                        className="user-photo"
+                        />
+                      )}
+                      </p>
+                      <label>Categoria:</label>
+                      <p>{selectedTask.category_id}</p>
+                    </div>
+
                     <label>Arquivo:</label>
                     <p>{selectedTask.file_path}</p>
                 </div>

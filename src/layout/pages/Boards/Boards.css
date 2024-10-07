@@ -7,7 +7,7 @@
   
 .kanban-column {
     background: rgba(255, 255, 255, 0.05);
-    border-top: 1rem solid var(--background-color);
+    border-top: 1rem solid var(--button-escolhido);
     backdrop-filter: blur(3px);
     -webkit-backdrop-filter: blur(3px);
     padding: 16px;
@@ -155,7 +155,7 @@
       outline: none;
       transition: border-color 0.3s ease;
       &:focus{
-      border-color: var(--background-color);
+      border-color: var(--button-escolhido);
       }
     }
     button {

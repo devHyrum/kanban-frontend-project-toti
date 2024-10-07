@@ -244,7 +244,7 @@ export default function Ajustes({ userId, myUserId }) { // Recebe o ID do usuár
 
             <div className='footer-meu-perfil'>
               <p className='creation-date'>© 2024 Kanban</p>
-              <span type="text" id="profissao" className="creation-date"   placeholder=" " disabled> Perfil criado em: {userData.criacao}</span>
+              <span type="text" id="profissao" className="creation-date"> Perfil criado em: {userData.criacao}</span>
             </div>
               </div>
             </div>
