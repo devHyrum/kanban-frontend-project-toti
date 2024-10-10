@@ -44,20 +44,23 @@
   gap: 20px;
   background: rgba(255, 255, 255, 0.05);
   border-radius: 16px;
+  overflow-x: auto;
+  scroll-behavior: smooth;
+  height: calc(100vh - 13.7rem);
   box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
   backdrop-filter: blur(3px);
   -webkit-backdrop-filter: blur(3px);
-
+  &::-webkit-scrollbar {
+    width: 6px;
+  }
+  &::-webkit-scrollbar-thumb {
+    background: var(--barra-scroll);
+    border-radius: 10px;
+  }
+  
 }
 
-.relatorios-conteudo::-webkit-scrollbar {
-  width: 6px;
-}
 
-.relatorios-conteudo::-webkit-scrollbar-thumb {
-  background: var(--barra-scroll);
-  border-radius: 10px;
-}
 
 .relatorios-card {
   background-color: var(--background-pages);
@@ -137,12 +140,6 @@
   background-color: #ed3a51;
 }
 
-.relatorios-conteudo{
-  overflow-x: auto;
-  scroll-behavior: smooth; 
-  height: calc(100vh - 8.5rem);
-}
-
 .relatorio-usuario{
   display: flex;
   align-items: center;
@@ -206,9 +203,9 @@
   }
 }
 
-@media (width <= 768px) {
-  .relatorios-conteudo{
-    height: calc(100vh - 5.9rem);
+@media (width <= 767px) {
+  .relatorios-container{
+    height: calc(100vh - 14rem);
   }
   .relatorios-filters{
     display: flex;
@@ -261,5 +258,15 @@
   }
   .relatorios-description {
     font-size: 12px;
+  }
+}
+@media (768px <= width <= 1023px){
+  .relatorios-container{
+    height: calc(100vh - 15rem);
+  }
+}
+@media (1024px <= width <= 1280px){
+  .relatorios-container{
+    height: calc(100vh - 17rem);
   }
 }

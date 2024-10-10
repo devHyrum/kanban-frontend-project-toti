@@ -17,7 +17,7 @@
   --fundo-hover: #F2EBFD;
   --barra-scroll: #d8c4fa;
   --sombreado: rgba(0, 0, 0, 0.1);
-  --background-image: url(./assets/Relatorios/fundoLight.svg);
+  --background-image: url(./assets/Relatorios/background-light.svg);
 }
 
 [data-theme='dark'] {
@@ -74,6 +74,8 @@ label{
   padding: 1rem 3rem 0rem 3rem;
   margin-top: 1rem;
   background-image: var(--background-image);
+  background-size: cover;
+  background-color: white;
   border-radius: 20px 0 0 0;
   height: calc(100vh - 2.1rem);
 }

@@ -16,6 +16,7 @@
     width: 30%;
     box-shadow: 0 4px 6px var(--sombreado);
     overflow-y: auto;
+    scroll-behavior: smooth;
     height: full;
     &::-webkit-scrollbar {
       width: 6px;
@@ -25,7 +26,10 @@
       border-radius: 10px;
     }
   }
-  
+
+  .list-kards{
+    overflow-y: auto;
+  }
   
   
   .column-header {
