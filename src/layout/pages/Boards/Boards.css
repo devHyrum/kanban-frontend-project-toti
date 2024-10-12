@@ -169,17 +169,15 @@
     }
   }
 
-/* Início da Estilização do Modal de Editar */
 
-/* Estilização Modal de exibição... */
 .but {
-  position: absolute; /* Permite que o aside se posicione em relação ao modal */
-  top: 1rem; /* Distância do topo */
-  right: 1rem; /* Distância da direita */
+  position: absolute; 
+  top: 1rem; 
+  right: 1rem;
   display: flex;
-  flex-direction: column; /* Alinha os botões em coluna */
-  gap: 1em; /* Espaçamento entre os botões */
-  border-radius: 8px; /* Adiciona cantos arredondados (opcional) */
+  flex-direction: column;
+  gap: 1em;
+  border-radius: 8px;
 }
 
 .but button {

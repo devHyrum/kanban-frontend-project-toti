@@ -1,5 +1,5 @@
 import React, { useContext } from 'react';
-import { ThemeContext } from '../../../context/ThemeProvider.jsx'; // Certifique-se de ajustar o caminho
+import { ThemeContext } from '../../../context/ThemeProvider.jsx';
 import './ThemeSwitcher.css'
 import light from '../../../assets/Sidebar/lightMode.svg'
 import dark from '../../../assets/Sidebar/darkMode.svg'

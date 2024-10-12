@@ -9,7 +9,6 @@ export default function Header({ userId }) {
 
   const location = useLocation();
 
-  // Função para buscar as informações do usuário
   const fetchUser = async () => {
     try {
       const response = await fetch(`http://localhost:3000/users/${userId}`);

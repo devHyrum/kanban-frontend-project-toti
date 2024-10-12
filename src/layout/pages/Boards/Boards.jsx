@@ -5,9 +5,9 @@ import './Boards.css'
 const Boards = ({myUserId}) => {
   const [tasks, setTasks] = useState([]);
   const [users, setUsers] = useState([]);
-  const [selectedTask, setSelectedTask] = useState([]); // Tarefa selecionada para exibição
+  const [selectedTask, setSelectedTask] = useState([]);
   const [showTaskModal, setShowTaskModal] = useState(false);
-  const [isEditing, setIsEditing] = useState(false); // Define se o usuário está em modo de edição
+  const [isEditing, setIsEditing] = useState(false);
   const [showNewTaskModal, setShowNewTaskModal] = useState(false);
   const [categories, setCategories] = useState([]);
   const [listTask, setListTask] = useState([]);
@@ -29,7 +29,7 @@ const Boards = ({myUserId}) => {
   // Busca lista de usuários
 const fetchUsers = async () => {
   try {
-    const response = await axios.get('http://localhost:3000/users'); // Assumindo um endpoint que retorna os usuários
+    const response = await axios.get('http://localhost:3000/users');
     setUsers(response.data);
   } catch (error) {
     console.error('Erro ao buscar usuários:', error);
@@ -42,9 +42,9 @@ const handleUserInput = (e) => {
   setNewTask({ ...newTask, user_id: input });
 
   if (input.trim() === '') {
-    setSuggestions([]); // Não mostrar sugestões se o input estiver vazio
+    setSuggestions([]);
   } else {
-    // Filtrar os usuários que começam com o valor digitado
+
     const filteredSuggestions = users.filter((user) =>
       user.name.toLowerCase().startsWith(input.toLowerCase())
     );
@@ -58,7 +58,7 @@ const handleSuggestionClick = (user) => {
   setSelectedTask({ ...selectedTask, user_id: user.name });
   setNewTask({ ...newTask, user_id: user.name });
 
-  setSuggestions([]); // Esconder as sugestões
+  setSuggestions([]);
 };
 
 const fetchCategories = async () => {
@@ -76,9 +76,9 @@ const handleCategoryInput = (e) => {
   setNewTask({ ...newTask, category_id: input });
 
   if (input.trim() === '') {
-    setCategorySuggestions([]); // Não mostrar sugestões se o input estiver vazio
+    setCategorySuggestions([]);
   } else {
-    // Filtrar as categorias que começam com o valor digitado
+
     const filteredSuggestions = categories.filter((category) =>
       category.name.toLowerCase().startsWith(input.toLowerCase())
     );
@@ -88,9 +88,9 @@ const handleCategoryInput = (e) => {
 
 // Função para quando o usuário clicar em uma sugestão de categoria
 const handleCategorySuggestionClick = (category) => {
-  setSelectedTask({ ...selectedTask, category_id: category.name }); // Definir a categoria selecionada
+  setSelectedTask({ ...selectedTask, category_id: category.name });
   setNewTask({ ...newTask, category_id: category.name });
-  setCategorySuggestions([]); // Esconder as sugestões
+  setCategorySuggestions([]);
 };
 
 const fetchListTask = async () => {
@@ -116,8 +116,8 @@ const fetchListTask = async () => {
   const fetchTaskDetails = async (id) => {
     try {
       const response = await axios.get(`http://localhost:3000/tasks/${id}`);
-      setSelectedTask(response.data); // Exibir detalhes da tarefa
-      setIsEditing(false); // Não entra em modo de edição diretamente
+      setSelectedTask(response.data);
+      setIsEditing(false);
       setShowTaskModal(true);
     } catch (error) {
       console.error('Erro ao buscar detalhes da tarefa:', error);
@@ -129,13 +129,13 @@ const fetchListTask = async () => {
       try {
         const response = await axios.put(`http://localhost:3000/tasks/${myUserId}/tasks/${selectedTask.id}`, selectedTask, {
           headers: {
-            'Content-Type': 'multipart/form-data',  // Garantir que o tipo de conteúdo seja multipart
+            'Content-Type': 'multipart/form-data',
           },
         });
         console.log('Tarefa editada com sucesso:', response.data);
         setSelectedTask(response.data);
-        setShowTaskModal(false); // Fechar o modal após edição
-        fetchTasks(); // Atualizar a lista de tarefas
+        setShowTaskModal(false);
+        fetchTasks();
       } catch (error) {
         console.error('Erro ao editar a tarefa:', error);
       }
@@ -147,7 +147,7 @@ const fetchListTask = async () => {
       const response = await axios.delete(`http://localhost:3000/tasks/${id}`);
       setSelectedTask(response.data);
       setShowTaskModal(false);
-      fetchTasks(); // Atualizar tarefas após a criação
+      fetchTasks();
     } catch (error) {
       console.error('Erro ao apagar a tarefa:', error);
     }
@@ -156,7 +156,6 @@ const fetchListTask = async () => {
   // Função para criar uma nova tarefa
   const createTask = async () => {
     try {
-      // Criar uma instância de FormData para enviar o arquivo e os outros campos
       const formData = new FormData();
       formData.append('title', newTask.title);
       formData.append('description', newTask.description);
@@ -166,21 +165,17 @@ const fetchListTask = async () => {
       formData.append('user_id', newTask.user_id);
       formData.append('category_id', newTask.category_id);
       formData.append('task_list_id', newTask.task_list_id);
-  
-      // Adicionar o arquivo apenas se existir
       if (newTask.file) {
         formData.append('file', newTask.file);
       }
-  
-      // Fazer a requisição com o FormData
-      await axios.post('http://localhost:3000/tasks', formData, {
+        await axios.post('http://localhost:3000/tasks', formData, {
         headers: {
-          'Content-Type': 'multipart/form-data',  // Garantir que o tipo de conteúdo seja multipart
+          'Content-Type': 'multipart/form-data',
         },
       });
   
-      fetchTasks(); // Atualizar tarefas após a criação
-      setShowNewTaskModal(false); // Fechar modal de nova tarefa
+      fetchTasks();
+      setShowNewTaskModal(false);
     } catch (error) {
       console.error('Erro ao criar nova tarefa:', error);
     }
@@ -325,7 +320,7 @@ const fetchListTask = async () => {
                 />
                 {suggestions.length > 0 && (
                   <ul style={{ position: 'absolute',
-                    top: '100%', // Posicionar logo abaixo do input
+                    top: '100%',
                     left: 0,
                     width: '100%',
                     border: '1px solid #ccc',

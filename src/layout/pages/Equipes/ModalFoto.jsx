@@ -6,13 +6,13 @@ export default function ModalFoto({ isOpen, closeModal, imageSrc, altText }) {
   const downloadImage = () => {
     const link = document.createElement('a');
     link.href = imageSrc;
-    link.setAttribute('download', `${altText}.jpg`); // Define o nome do arquivo
+    link.setAttribute('download', `${altText}.jpg`);
     document.body.appendChild(link);
     link.click();
-    document.body.removeChild(link); // Remove o link após o clique
+    document.body.removeChild(link);
   };
     
-  if (!isOpen) return null; // Se o modal não estiver aberto, retorna null
+  if (!isOpen) return null;
 
   return (
     <div className={`modal-overlay ${isOpen ? 'open' : ''}`} onClick={closeModal}>

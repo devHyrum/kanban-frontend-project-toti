@@ -1,13 +1,13 @@
 import React, { useState, useEffect } from "react";
 import LoaderEquipes from "../../../components/loadings/LoaderEquipes.jsx";
-import Modal from "./ModalFoto.jsx"; // Importe o modal
+import Modal from "./ModalFoto.jsx";
 import './Equipes.css'
 
 export default function Equipes() {
   const [loading, setLoading] = useState(true);
   const [usuarios, setUsuarios] = useState([]);
-  const [modalOpen, setModalOpen] = useState(false); // Controla a abertura do modal
-  const [selectedImage, setSelectedImage] = useState(null); // Guarda a imagem selecionada
+  const [modalOpen, setModalOpen] = useState(false);
+  const [selectedImage, setSelectedImage] = useState(null);
 
   const fetchUsuarios = async () => {
     try {
@@ -28,13 +28,11 @@ export default function Equipes() {
     return () => clearTimeout(timer);
   }, []);
 
-  // Função para abrir o modal com a imagem
   const openModal = (imageSrc) => {
     setSelectedImage(imageSrc);
     setModalOpen(true);
   };
 
-  // Função para fechar o modal
   const closeModal = () => {
     setModalOpen(false);
     setSelectedImage(null);

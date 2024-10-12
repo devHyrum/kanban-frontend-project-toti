@@ -11,10 +11,10 @@ export default function Relatorios() {
   const [loading, setLoading] = useState(true);
   const [tasks, setTasks] = useState([]);
   const [categories, setCategories] = useState([]);
-  const [filterCategory, setFilterCategory] = useState(""); // Filtro por categoria
-  const [filterPriority, setFilterPriority] = useState(""); // Filtro por prioridade
-  const [searchValue, setSearchValue] = useState(""); // Filtro por busca
-  const [expandedTaskId, setExpandedTaskId] = useState(null); // Controla qual card está expandido
+  const [filterCategory, setFilterCategory] = useState("");
+  const [filterPriority, setFilterPriority] = useState("");
+  const [searchValue, setSearchValue] = useState("");
+  const [expandedTaskId, setExpandedTaskId] = useState(null);
   const { theme } = useContext(ThemeContext);
 
   const notFoundImage = theme === 'dark' ? notFoundYourTaskDark : theme === 'daltonism' ? notFoundYourTaskDaltonismo : notFoundYourTask;
@@ -82,7 +82,7 @@ export default function Relatorios() {
   }, []);
 
   const handleCardClick = (taskId) => {
-    setExpandedTaskId((prevTaskId) => (prevTaskId === taskId ? null : taskId)); // Alterna a expansão
+    setExpandedTaskId((prevTaskId) => (prevTaskId === taskId ? null : taskId));
   };
 
   return (

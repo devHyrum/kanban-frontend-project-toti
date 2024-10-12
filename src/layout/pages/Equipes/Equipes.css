@@ -4,12 +4,12 @@
   height: calc(100vh - 8.5rem);
 }
 .equipes-conteudo::-webkit-scrollbar {
-  width: 6px; /* Largura da barra */
+  width: 6px;
 }
 
 .equipes-conteudo::-webkit-scrollbar-thumb {
-  background: var(--barra-scroll); /* Cor da parte rolável */
-  border-radius: 10px; /* Arredondamento dos cantos */
+  background: var(--barra-scroll);
+  border-radius: 10px;
 }
 
 .equipe-container {
