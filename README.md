@@ -2,14 +2,19 @@
 
 Design Desktop
 
-![demoDesktop](/public/DemoDesktop/Desktop++-1280x720(5).png)
+![demoDesktop](/public/DemoDesktop/desktop.png)
 
 Design Mobile
 
-![demoMobile](/public//DemoMobile/Mobile-359x586(3).png)
+![demoMobile](/public/DemoMobile/mobile.png)
+
+Design Color Blindness
+
+![demoBlidness](/public/DemoDesktop/Galaxy-Fold2-localhost.png)
+
 
 ## Descrição
-Este projeto é uma aplicação web de gerenciamento de tarefas baseada no estilo Kanban, desenvolvida para ajudar empresas a organizarem suas equipes e tarefas de forma mais eficiente. O aplicativo permite que os usuários criem, editem e gerenciem tarefas e equipes em diferentes quadros, proporcionando uma visão clara do fluxo de trabalho.
+Este projeto é uma aplicação web de gerenciamento de tarefas baseada no estilo Kanban, desenvolvida para ajudar empresas a organizarem suas equipes e tarefas de forma mais eficiente e acessível para pessoas **daltônicas**. O aplicativo permite que os usuários criem, editem e gerenciem tarefas e equipes em diferentes quadros, proporcionando uma visão clara do fluxo de trabalho.
 
 A aplicação foi desenvolvida usando React para a interface de usuário e CSS puro para o design responsivo e estilização.
 
@@ -19,6 +24,7 @@ A aplicação foi desenvolvida usando React para a interface de usuário e CSS p
 - **Visualização em Quadro Kanban**: As tarefas são organizadas em quadros Kanban, facilitando a visualização do progresso de cada uma.
 - **Filtros de Tarefas**: Opção de filtrar tarefas por responsáveis, categoria ou status.
 - **Modularização**: Código estruturado de forma modular para facilitar o entendimento e a manutenção.
+- **Troca de Temas**: É possível mudar o tema de light para dark ou para blindness
 
 ## Tecnologias Utilizadas
 - **React**: Biblioteca JavaScript para construção de interfaces de usuário.
